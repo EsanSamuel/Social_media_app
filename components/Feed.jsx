@@ -25,8 +25,10 @@ const CardList = ({ data, handleTagClick }) => {
 };
 
 const Feed = () => {
-  const [searchTerm, setSearchTerm] = useState("");
+  const [searchText, setSearchText] = useState("");
   const [allPost, setAllPosts] = useState([]);
+  const [searchTimeout, setSearchTimeout] = useState(null);
+  const [searchedResults, setSearchedResults] = useState([]);
 
   useEffect(() => {
     const getData = async () => {
@@ -38,16 +40,53 @@ const Feed = () => {
     getData();
   }, []);
 
+  const filterPrompts = (searchtext) => {
+    const regex = new RegExp(searchtext, "i"); // 'i' flag for case-insensitive search
+    return allPost.filter(
+      (item) =>
+        regex.test(item.creator.username) ||
+        regex.test(item.tag) ||
+        regex.test(item.prompt)
+    );
+  };
+
+  const handleSearchChange = (e) => {
+    clearTimeout(searchTimeout);
+    setSearchText(e.target.value);
+
+    // debounce method
+    setSearchTimeout(
+      setTimeout(() => {
+        const searchResult = filterPrompts(e.target.value);
+        setSearchedResults(searchResult);
+      }, 500)
+    );
+  };
+
+  
+  const handleTagClick = (tagName) => {
+    setSearchText(tagName);
+
+    const searchResult = filterPrompts(tagName);
+    setSearchedResults(searchResult);
+  };
+
+
   return (
     <div className="mt-10">
       <input
         className="w-full flex rounded-lg mt-2 p-3 text-sm text-gray-500 outline-0 input"
         type="search"
         placeholder="Search..."
-        onChange={(e) => setSearchTerm(e.target.value)}
+        onChange={handleSearchChange}
+        value={searchText}
       />
 
-      <CardList data={allPost} handleTagClick={() => {}} />
+      {searchText ? (
+        <CardList data={searchedResults} handleTagClick={handleTagClick} />
+      ) : (
+        <CardList data={allPost} handleTagClick={handleTagClick} />
+      )}
     </div>
   );
 };
