@@ -1,0 +1,22 @@
+@import url("https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz@12..96&family=Cedarville+Cursive&family=Poppins:wght@300;400&display=swap");
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+* {
+  font-family: "Bricolage Grotesque", sans-serif;
+}
+
+.input {
+  box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
+}
+
+.dark-mode {
+  background-color: black;
+  transition: 0.5s;
+}
+
+.dark-mode h1 {
+  color: white;
+}
