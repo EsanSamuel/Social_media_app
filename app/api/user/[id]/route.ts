@@ -12,9 +12,9 @@ interface PostData {
 }
 
 cloudinary.config({
-  cloud_name: "dirm0bwdw",
-  api_key: "244737511899697",
-  api_secret: "LBf0Bay00WC4w1bonkdeapChUO4",
+  cloud_name: process.env.CLOUDINARY_CLOUD_NAME,
+  api_key: process.env.CLOUDINARY_API_KEY,
+  api_secret: process.env.CLOUDINARY_API_SECRET,
 });
 
 export const GET = async (request: Request, { params }: { params: Params }) => {
@@ -37,6 +37,10 @@ export const PATCH = async (
     connectDB();
     const ImageUrl = await cloudinary.uploader.upload(image);
     const updateUser = await User.findById(params.id);
+
+    if (!updateUser) {
+      return new Response("Users not found!", { status: 404 });
+    }
 
     updateUser.username = username;
     updateUser.image = ImageUrl.url;

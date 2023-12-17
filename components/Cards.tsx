@@ -5,7 +5,7 @@ import { useSession } from "next-auth/react";
 import { useRouter } from "next/navigation";
 import { BsThreeDots } from "react-icons/bs";
 import { IoCloseOutline } from "react-icons/io5";
-import axios, { Axios } from "axios";
+import axios from "axios";
 import { FaRegHeart } from "react-icons/fa";
 
 interface Props {

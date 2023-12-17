@@ -3,9 +3,9 @@ import Post from "../../../../models/post";
 import { v2 as cloudinary } from "cloudinary";
 
 cloudinary.config({
-  cloud_name: "dirm0bwdw",
-  api_key: "244737511899697",
-  api_secret: "LBf0Bay00WC4w1bonkdeapChUO4",
+  cloud_name: process.env.CLOUDINARY_CLOUD_NAME,
+  api_key: process.env.CLOUDINARY_API_KEY,
+  api_secret: process.env.CLOUDINARY_API_SECRET,
 });
 
 interface PostData {
