@@ -24,8 +24,17 @@ type Provider = {
 
 type Providers = Record<string, Provider>;
 
+interface Session {
+  user: {
+    id?: string;
+    name?: string;
+    email?: string;
+    image?: string;
+  };
+}
+
 const Sidebar = () => {
-  const { data: session } = useSession();
+  const { data: session } = useSession<Session>();
   const [user, setUser] = useState<any>("");
   const [provider, setProvider] = useState<Providers | null>(null);
   const pathName = usePathname();
