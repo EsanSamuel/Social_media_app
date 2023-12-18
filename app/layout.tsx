@@ -1,8 +1,5 @@
 import "./globals.css";
-import { Inter } from "next/font/google";
 import Provider from "../components/Providers";
-
-const inter = Inter({ subsets: ["latin"] });
 
 interface Props {
   children: React.ReactNode;
