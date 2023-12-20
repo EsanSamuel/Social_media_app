@@ -5,20 +5,12 @@ import Image from "next/image";
 import UserCard from "./UserCard";
 import { useRouter } from "next/navigation";
 import { useSession } from "next-auth/react";
+import useUsers from "../hooks/useUsers";
 
 const Users = () => {
   const { data: session } = useSession();
-  const [users, setUsers] = useState<any>([]);
   const router = useRouter();
-
-  useEffect(() => {
-    const getUsers = async () => {
-      const response = await axios.get("/api/user");
-      setUsers(response.data);
-      console.log(response.data);
-    };
-    getUsers();
-  }, []);
+  const { data: users = [] } = useUsers();
 
   return (
     <div className=" border-l border-[#5f5f5f] w-full  sticky top-5 min-h-[95vh] min-w-[200px] xl:block hidden">

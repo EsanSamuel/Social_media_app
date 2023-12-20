@@ -2,6 +2,7 @@
 import axios from "axios";
 import React, { useState, useEffect } from "react";
 import Card from "./Cards";
+import usePosts from "../hooks/usePosts";
 
 interface Props {
   data: Record<string, any>;
@@ -18,16 +19,7 @@ const Cardform = ({ data }: Props) => (
 );
 
 const Posts = () => {
-  const [post, setPost] = useState<any>([]);
-
-  useEffect(() => {
-    const getPosts = async () => {
-      const response = await axios.get("/api/posts");
-      setPost(response.data);
-      console.log(response.data);
-    };
-    getPosts();
-  }, []);
+  const { data: post = [] } = usePosts();
 
   return (
     <div className="sm:px-10 pt-10  overflow-y-auto">
