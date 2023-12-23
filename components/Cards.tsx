@@ -70,8 +70,12 @@ const Card = ({ post }: Props) => {
     }
   };
 
+  const handlePostClick = async () => {
+    router.push(`/PostDetails?postId=${post._id}`)
+  }
+
   return (
-    <div className="mt-10 bg-[#1c1c24] sm:rounded-[40px] rounded-[20px] sm:p-7 p-5">
+    <div className="mt-10 bg-[#1c1c24] sm:rounded-[40px] rounded-[20px] sm:p-7 p-5" onClick={handlePostClick}>
       <div className="flex w-full justify-between gap-2">
         <div className="flex gap-2" onClick={handleClick}>
           <Image

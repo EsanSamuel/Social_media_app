@@ -1,11 +1,12 @@
 import mongoose, { Schema, models, model } from "mongoose";
 
-interface ISave {
+interface IComment {
   poster: mongoose.Types.ObjectId;
   post: mongoose.Types.ObjectId;
+  comment: string;
 }
 
-const SaveSchema = new Schema<ISave>({
+const CommentSchema = new Schema<IComment>({
   poster: {
     type: Schema.Types.ObjectId,
     ref: "User",
@@ -14,8 +15,11 @@ const SaveSchema = new Schema<ISave>({
     type: Schema.Types.ObjectId,
     ref: "Post",
   },
+  comment: {
+    type: String,
+  },
 });
 
-const SavePost = models.SavePost || model<ISave>("SavePost", SaveSchema);
+const Comment = models.Comment || model<IComment>("Comment", CommentSchema);
 
-export default SavePost;
+export default Comment;

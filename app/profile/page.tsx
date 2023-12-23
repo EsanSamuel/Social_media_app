@@ -69,7 +69,7 @@ const page = () => {
         <div className="">
           {posts.map((post: Record<string, any>) => (
             <div key={post._id}>
-              <Card post={post} handleDelete={deletePosts} />
+              <Card post={post}  />
             </div>
           ))}
         </div>
