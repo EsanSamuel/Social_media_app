@@ -40,20 +40,20 @@ const page = () => {
   };
 
   return (
-    <div className="sm:p-5 flex gap-5 w-full relative">
+    <div className="sm:p-5 sm:flex gap-5 w-full relative">
       <Sidebar />
-      <div className="sm:p-20  w-full">
+      <div className="sm:p-20 p-5 w-full">
         <Image
           src={user.image}
           width={100}
           height={100}
           alt=""
-          className="w-[150px] h-[150px] rounded-full"
+          className="sm:w-[150px] sm:h-[150px] w-[100px] h-[100px] rounded-full sm:mt-0 mt-10"
         />
-        <div className="mt-5 p-5 flex w-full justify-between">
+        <div className="py-5 flex w-full justify-between">
           <div>
-            <h1 className="text-[#eaeaea] text-[25px]">{user.username}</h1>
-            <h1 className="text-[#eaeaea] text-[15px]">{user.email}</h1>
+            <h1 className="text-[#eaeaea] text-[25px]">{user.username}(Me)</h1>
+            <h1 className="text-[#eaeaea] sm:text-[15px] text-[13px]">{user.email}</h1>
           </div>
           <div className="">
             <button
@@ -67,9 +67,13 @@ const page = () => {
         <hr className="text-[#5f5f5f] bg-[#5f5f5f]" />
 
         <div className="">
+          <div className='flex justify-between w-full pt-5'>
+            <h1 className='text-[#eaeaea] text-[16px]'>My Posts</h1>
+            <><h1 className='text-[#eaeaea] text-[12px]'>{posts.length} posts</h1></>
+          </div>
           {posts.map((post: Record<string, any>) => (
             <div key={post._id}>
-              <Card post={post}  />
+              <Card post={post} />
             </div>
           ))}
         </div>

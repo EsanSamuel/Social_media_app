@@ -73,15 +73,21 @@ const page = () => {
           />
         )}
       </div>
-      <input className="" onChange={handleImageChange} type="file" />
+      <div className="rounded text-[#eaeaea] ">
+        <h1 className='py-2 px-4 rounded text-[#eaeaea] bg-[#8c6dfd]'>Select Image</h1>
+        <input className=" opacity-0" onChange={handleImageChange} type="file" />
+      </div>
 
-      <input
-        className="p-2 bg-transparent border border-[#5f5f5f] rounded text-[#eaeaea]"
-        onChange={(e) => setUsername(e.target.value)}
-        placeholder="Enter username"
-        type="text"
-        value={username}
-      />
+      <label className='w-full text-[#eaeaea]'>
+        <h1 className="py-1">Change username</h1>
+        <input
+          className="p-2 bg-transparent border border-[#5f5f5f] rounded w-full text-[#eaeaea]"
+          onChange={(e) => setUsername(e.target.value)}
+          placeholder="Enter username"
+          type="text"
+          value={username}
+        />
+      </label>
 
       <button
         className="py-2 px-4 rounded text-[#eaeaea] bg-[#8c6dfd] w-full"

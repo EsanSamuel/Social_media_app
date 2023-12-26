@@ -10,7 +10,17 @@ import useUsers from "../hooks/useUsers";
 const Users = () => {
   const { data: session } = useSession();
   const router = useRouter();
-  const { data: users = [] } = useUsers();
+  const { data: users = [], isLoading } = useUsers();
+
+  if (isLoading) {
+    return (
+      <div>
+        <h1 className="text-center text-[#eaeaea] pt-[30%] sm:flex hidden">
+          Loading users...
+        </h1>
+      </div>
+    )
+  }
 
   return (
     <div className=" border-l border-[#5f5f5f] w-full  sticky top-5 min-h-[95vh] min-w-[200px] xl:block hidden">

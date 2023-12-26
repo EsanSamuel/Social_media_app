@@ -2,10 +2,7 @@ import useSWR from "swr";
 import fetcher from "../libs/axios";
 
 const usePosts = () => {
-  const { data, isLoading, error, mutate } = useSWR("/api/posts", fetcher,{
-    revalidateOnFocus: false,
-    revalidateOnReconnect: false,
-  });
+  const { data, isLoading, error, mutate } = useSWR("/api/posts", fetcher);
 
   return {
     data,

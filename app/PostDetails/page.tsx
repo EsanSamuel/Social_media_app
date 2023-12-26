@@ -6,6 +6,8 @@ import { BsThreeDots } from 'react-icons/bs'
 import Image from 'next/image'
 import { FaRegHeart } from 'react-icons/fa'
 import { useSession } from 'next-auth/react'
+import CommentCard from '../../components/CommentCard'
+import { toast } from 'react-hot-toast'
 
 const page = () => {
     const { data: session } = useSession()
@@ -25,11 +27,19 @@ const page = () => {
     }, [])
 
     const createComment = async () => {
-        await axios.post('/api/comment/new', {
-            userId: session?.user?.id,
-            postId: postId,
-            comment
-        })
+        setComment('')
+        try {
+            await axios.post('/api/comment/new', {
+                userId: session?.user?.id,
+                postId: postId,
+                comment
+            })
+
+            toast.success('Comment posted!')
+            window.location.reload()
+        } catch (error) {
+            console.log(error)
+        }
     }
 
     useEffect(() => {
@@ -84,23 +94,18 @@ const page = () => {
 
 
             </div>
-
-            {allComment.map((comment: Record<string, any>) => (
-                <div key={comment._id}>
-                      <Image
-                            src={comment.poster.image}
-                            width={100}
-                            height={100}
-                            alt=""
-                            className="w-[35px] h-[35px] rounded-full"
-                        />
-                    {comment.comment}
-                </div>
-            ))}
-
-            <div className='pt-10'>
-                <input onChange={(e) => setComment(e.target.value)} className='bg-transparent border border-[#5f5f5f] p-2 rounded w-full ' />
-                <button onClick={createComment}>Comment</button>
+            <div className='sm:p-10 pt-10'>
+                <h1 className='text-white pb-2'>Comments</h1>
+                {allComment.map((comment: Record<string, any>) => (
+                    <div key={comment._id} className='w-auto'>
+                        <CommentCard comment={comment} />
+                    </div>
+                ))}
+            </div>
+            <div className='pt-10 flex gap-2'>
+                <input onChange={(e) => setComment(e.target.value)} placeholder='Enter Comment...'
+                    className='text-white bg-transparent border border-[#5f5f5f] p-2 rounded w-full ' />
+                <button onClick={createComment} className='bg-[#8c6dfd] p-2 rounded text-white'>Comment</button>
             </div>
         </div>
     )

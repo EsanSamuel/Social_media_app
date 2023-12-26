@@ -30,6 +30,7 @@ const UserCard = ({ user }: Props) => {
           height={100}
           alt=""
           className="rounded-full w-14 h-14"
+          priority
         />
       </div>
       <h1 className="text-[#eaeaea] text-[14px] text-center leading-[40px] line-clamp-1">

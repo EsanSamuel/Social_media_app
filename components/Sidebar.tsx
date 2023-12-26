@@ -57,6 +57,7 @@ const Sidebar = () => {
   }, []);
 
   return (
+    <div>
     <div className="text-[#eaeaea] h-[95vh] sm:flex hidden flex flex-col gap-5 w-auto pr-7 border-r sticky top-5 border-[#5f5f5f]">
       <h1 className="flex gap-2 text-[25px]">
         <SiGoogleadmob className="mt-1" />
@@ -70,6 +71,7 @@ const Sidebar = () => {
             height={100}
             alt=""
             className="w-[43px] h-[43px] rounded-full"
+            priority
           />
           <div className="flex flex-col">
             <h1 className="text-[20px]">{user.username}</h1>
@@ -166,6 +168,7 @@ const Sidebar = () => {
           </li>
         </ul>
       </div>
+    </div>
     </div>
   );
 };

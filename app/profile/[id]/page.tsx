@@ -29,7 +29,7 @@ const page = ({ params }: { params: Params }) => {
   }, [params?.id]);
 
   return (
-    <div className="sm:p-5 flex gap-5 w-full relative">
+    <div className="sm:p-5 sm:flex gap-5 w-full relative">
       <Sidebar />
       <div className="sm:p-20  w-full">
         <Image
@@ -37,7 +37,7 @@ const page = ({ params }: { params: Params }) => {
           width={100}
           height={100}
           alt=""
-          className="w-[150px] h-[150px] rounded-full"
+          className="sm:w-[150px] sm:h-[150px] w-[100px] h-[100px] rounded-full"
         />
         <div className="mt-5  text-[25px]">
           <h1 className="text-[#eaeaea]">{username}</h1>
@@ -46,6 +46,7 @@ const page = ({ params }: { params: Params }) => {
         <hr />
 
         <div className="">
+
           {posts.map((post: Record<string, any>) => (
             <div key={post._id}>
               <Card post={post} />

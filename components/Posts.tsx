@@ -19,10 +19,19 @@ const Cardform = ({ data }: Props) => (
 );
 
 const Posts = () => {
-  const { data: post = [] } = usePosts();
+  const { data: post = [], isLoading } = usePosts();
 
+  if (isLoading) {
+    return (
+      <div>
+        <h1 className="text-center text-[#eaeaea] pt-[30%]">
+          Loading posts...
+        </h1>
+      </div>
+    )
+  }
   return (
-    <div className="sm:px-10 pt-10  overflow-y-auto">
+    <div className="sm:px-10 pt-10  overflow-y-auto p-5">
       <h1 className="text-[#eaeaea] sm:text-[25px] text-[22px]">Home Feed</h1>
       <button className="bg-[#8c6dfd] text-[#eaeaea] px-3 py-2 rounded sm:mt-5 float-right ">
         Create Post

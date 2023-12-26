@@ -7,7 +7,7 @@ import React from "react";
 
 const page = () => {
   return (
-    <div className="sm:p-5 flex gap-5 flex-row relative">
+    <div className="sm:p-5 sm:flex gap-5 flex-row relative">
       <div className="w-auto">
         <Sidebar />
       </div>
