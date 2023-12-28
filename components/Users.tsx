@@ -15,8 +15,8 @@ const Users = () => {
   if (isLoading) {
     return (
       <div>
-        <h1 className="text-center text-[#eaeaea] pt-[30%] sm:flex hidden">
-          Loading users...
+        <h1 className="text-center text-[#eaeaea] pt-[50%] sm:flex hidden">
+          Loading...
         </h1>
       </div>
     )

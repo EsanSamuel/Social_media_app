@@ -96,11 +96,19 @@ const page = () => {
             </div>
             <div className='sm:p-10 pt-10'>
                 <h1 className='text-white pb-2'>Comments</h1>
-                {allComment.map((comment: Record<string, any>) => (
-                    <div key={comment._id} className='w-auto'>
-                        <CommentCard comment={comment} />
+                {allComment?.length > 0 ? (
+                    <>
+                        {allComment.map((comment: Record<string, any>) => (
+                            <div key={comment._id} className='w-auto'>
+                                <CommentCard comment={comment} />
+                            </div>
+                        ))}
+                    </>
+                ) : (
+                    <div>
+                        <h1 className='text-[#eaeaea]'>No comments found!, Be the first to comment!</h1>
                     </div>
-                ))}
+                )}
             </div>
             <div className='pt-10 flex gap-2'>
                 <input onChange={(e) => setComment(e.target.value)} placeholder='Enter Comment...'
