@@ -13,7 +13,7 @@ const Users = () => {
   if (isLoading) {
     return (
       <div>
-        <h1 className='text-[#eaeaea] mt-20'>Loading..</h1>
+        <h1 className='text-[#eaeaea] mt-20 sm:flex hidden'>Loading..</h1>
       </div>
     )
   }

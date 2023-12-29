@@ -82,7 +82,6 @@ const Card = ({ post }: Props) => {
   const handleLike = async () => {
     try {
       await axios.post(`/api/Like/${post._id}`, {
-        postId: post._id,
         userId: session?.user?.id
       })
       toast.success('Post liked!')

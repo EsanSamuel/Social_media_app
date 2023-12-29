@@ -8,7 +8,6 @@ interface Params {
 
 interface ILike {
   userId: string;
-  postId: string;
 }
 
 const updateLikeCounts = async (postId: string) => {
@@ -23,22 +22,21 @@ export const POST = async (
   request: Request,
   { params }: { params: Params }
 ) => {
-  const { userId, postId }: ILike = await request.json();
+  const { userId }: ILike = await request.json();
   try {
     await connectDB();
-
+    const postId = params.id;
     const existingLike = await Like.findOne({
-      post: postId,
       poster: userId,
+      post: postId,
     });
 
     if (existingLike) {
-      await existingLike.remove();
-      await updateLikeCounts(postId);
+      return new Response("Something went wrong!", { status: 500 });
     } else {
       const like = await Like.create({
-        post: postId,
         poster: userId,
+        post: postId,
       });
       await updateLikeCounts(postId);
       return new Response(JSON.stringify(like), { status: 201 });
