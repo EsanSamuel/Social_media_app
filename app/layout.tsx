@@ -1,4 +1,5 @@
 import "./globals.css";
+import React from 'react'
 import Provider from "../components/Providers";
 import { Toaster } from "react-hot-toast";
 
@@ -19,5 +20,5 @@ export default function RootLayout({ children }: Props) {
         <Provider>{children}</Provider>
       </body>
     </html>
-  );
+  )
 }

@@ -4,7 +4,7 @@ interface IPost {
   poster: mongoose.Types.ObjectId;
   post: string;
   image: string;
-  likes: number;
+  likeCounts: number;
 }
 
 const PostSchema = new Schema<IPost>({
@@ -20,7 +20,7 @@ const PostSchema = new Schema<IPost>({
     type: String,
     required: true,
   },
-  likes: { type: Number, default: 0 },
+  likeCounts: { type: Number, default: 0 },
 });
 
 const Post = models.Post || model<IPost>("Post", PostSchema);

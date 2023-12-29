@@ -81,8 +81,12 @@ const Card = ({ post }: Props) => {
 
   const handleLike = async () => {
     try {
-      const response = await axios.post(`/api/Like/${post._id}`)
-      setLikes(response.data.likes)
+      await axios.post(`/api/Like/${post._id}`, {
+        postId: post._id,
+        userId: session?.user?.id
+      })
+      toast.success('Post liked!')
+      window.location.reload()
     } catch (error) {
       console.log(error)
     }
@@ -138,7 +142,7 @@ const Card = ({ post }: Props) => {
           />
           <div className='flex gap-6'>
             <div className='flex gap-2'><FaRegHeart className="text-[#eaeaea] text-[15px] cursor-pointer " onClick={handleLike} />
-              <div className="text-[#eaeaea] text-[15px] mt-[-2px]">{likes}</div></div>
+              <div className="text-[#eaeaea] text-[15px] mt-[-2px]">{post.likeCounts}</div></div>
 
             <div className="flex gap-2">
               <FaRegCommentAlt className="text-[#eaeaea] text-[14px] cursor-pointer " onClick={handlePostClick} />
