@@ -53,9 +53,9 @@ const Posts = () => {
         <Cardform data={post} />
       </div>
 
-      <div className='sm:hidden mt-5'>
+     {/* <div className='sm:hidden mt-5'>
         <UserCarousel />
-      </div>
+         </div>*/}
     </div>
   );
 };

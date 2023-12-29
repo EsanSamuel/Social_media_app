@@ -18,7 +18,6 @@ const Card = ({ post }: Props) => {
   const [editmodal, setEditModal] = useState(false);
   const [edit, setEdit] = useState("");
   const [likes, setLikes] = useState(post.likes)
-  const [liked, setLiked] = useState(false)
   const router = useRouter();
 
   const handleClick = () => {
