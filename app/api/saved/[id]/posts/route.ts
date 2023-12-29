@@ -10,7 +10,8 @@ export const GET = async (request: Request, { params }: { params: Params }) => {
     await connectDB();
     const getSavedPost = await SavePost.find({ poster: params.id })
       .populate("poster")
-      .populate("post");
+      .populate("post")
+      .populate("owner");
 
     return new Response(JSON.stringify(getSavedPost), { status: 200 });
   } catch (error) {

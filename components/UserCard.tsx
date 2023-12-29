@@ -22,7 +22,7 @@ const UserCard = ({ user }: Props) => {
 
   return (
     <div className="flex-center flex-col items-center gap-4 space-y-4  border-[#5f5f5f] rounded-[20px]  py-2">
-      <div className=" ">
+      <div className=" flex justify-center items-center">
         {" "}
         <Image
           src={user.image}

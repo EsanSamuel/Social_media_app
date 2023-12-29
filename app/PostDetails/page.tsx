@@ -106,7 +106,7 @@ const page = () => {
                     </>
                 ) : (
                     <div>
-                        <h1 className='text-[#eaeaea]'>No comments found!, Be the first to comment!</h1>
+                        <h1 className='text-[#5f5f5f] sm:p-10 p-5 text-center'>No comments found!, Be the first to comment!</h1>
                     </div>
                 )}
             </div>

@@ -18,6 +18,20 @@ const CommentCard = ({ comment }: Props) => {
         toast.success('Comment deleted successfully!')
     }
 
+    useEffect(() => {
+        const getComment = async () => {
+            try {
+                const response = await axios.get(`/api/comment/${comment._id}`)
+                setEditComment(response.data.comment)
+            } catch (error) {
+                console.log(error)
+            }
+        }
+        getComment()
+    }, [])
+    
+
+
     const EditComment = async () => {
         await axios.patch(`/api/comment/${comment._id}`, {
             comment: editComment
@@ -39,7 +53,7 @@ const CommentCard = ({ comment }: Props) => {
                         <div className='text-[14px]'>{comment.comment}</div>
                         {session?.user?.id === (comment && comment.poster ? comment.poster._id : '') && (
                             <div className='flex gap-4 text-[#5f5f5f] text-[11px] cursor-pointer'>
-                                <h1 onClick={() => deleteComment(comment)}>Delete</h1>
+                                <h1 onClick={deleteComment}>Delete</h1>
                                 <><h1>Edit</h1></>
                             </div>
                         )}

@@ -58,7 +58,7 @@ const page = () => {
           <div className="">
             <button
               className="py-2 px-4 rounded text-[#eaeaea] bg-[#8c6dfd]"
-              onClick={() => EditProfile(user)}
+              onClick={EditProfile}
             >
               Edit
             </button>

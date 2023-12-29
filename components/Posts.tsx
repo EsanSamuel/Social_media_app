@@ -1,24 +1,20 @@
 "use client";
-import axios from "axios";
-import React, { useState, useEffect } from "react";
+import React, { CSSProperties } from "react";
 import Card from "./Cards";
 import usePosts from "../hooks/usePosts";
 import Link from "next/link";
-import useUsers from "../hooks/useUsers";
-import {
-  Carousel,
-  CarouselContent,
-  CarouselItem,
-  CarouselNext,
-  CarouselPrevious,
-} from "../@/components/ui/carousel"
-import UserCard from "./UserCard";
-import UserCarousel from "./UserCarousel";
+import ClipLoader from "react-spinners/ClipLoader";
 
 
 interface Props {
   data: Record<string, any>;
 }
+
+const override: CSSProperties = {
+  display: "block",
+  margin: "0 auto",
+  borderColor: "#8c6dfd",
+};
 
 const Cardform = ({ data }: Props) => (
   <div>
@@ -32,13 +28,18 @@ const Cardform = ({ data }: Props) => (
 
 const Posts = () => {
   const { data: post = [], isLoading } = usePosts();
-  const { data: users = [] } = useUsers()
 
   if (isLoading) {
     return (
       <div>
         <h1 className="text-center text-[#eaeaea] pt-[30%]">
-          Loading posts...
+          <ClipLoader
+            color='#8c6dfd'
+            cssOverride={override}
+            size={150}
+            aria-label="Loading Spinner"
+            data-testid="loader"
+          />
         </h1>
       </div>
     )
@@ -52,10 +53,6 @@ const Posts = () => {
       <div className="sm:px-10 sm:py-20 pt-5">
         <Cardform data={post} />
       </div>
-
-     {/* <div className='sm:hidden mt-5'>
-        <UserCarousel />
-         </div>*/}
     </div>
   );
 };

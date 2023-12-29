@@ -6,7 +6,8 @@ import { useRouter } from "next/navigation";
 import { BsThreeDots } from "react-icons/bs";
 import { IoCloseOutline } from "react-icons/io5";
 import axios from "axios";
-import { FaRegHeart } from "react-icons/fa";
+import { FaRegHeart, FaRegCommentAlt } from "react-icons/fa";
+import toast from "react-hot-toast";
 
 interface Props {
   post: Record<string, any>;
@@ -18,6 +19,7 @@ const Card = ({ post }: Props) => {
   const [editmodal, setEditModal] = useState(false);
   const [edit, setEdit] = useState("");
   const [likes, setLikes] = useState(post.likes)
+  const [comment, setComment] = useState([])
   const router = useRouter();
 
   const handleClick = () => {
@@ -33,9 +35,11 @@ const Card = ({ post }: Props) => {
       const response = await axios.post("/api/saved/new", {
         userId: session?.user?.id,
         postId: post._id,
+        ownerId: post.poster._id
       });
       console.log(response.data);
       setModal(false);
+      toast.success('Post saved!')
     } catch (error) {
       console.log(error);
     }
@@ -84,6 +88,15 @@ const Card = ({ post }: Props) => {
     }
   }
 
+  useEffect(() => {
+    const getComments = async () => {
+      const response = await axios.get(`/api/comment/${post._id}`)
+      setComment(response.data)
+    }
+    getComments()
+  }, [])
+
+
   return (
     <div>
       <div className="mt-10 bg-[#1c1c24] sm:rounded-[40px] rounded-[20px] sm:p-7 p-5" >
@@ -112,7 +125,7 @@ const Card = ({ post }: Props) => {
           />
         </div>
 
-        <div className="mt-5 flex flex-col gap-5" onClick={handlePostClick}>
+        <div className="mt-5 flex flex-col gap-5" >
           <h1 className="text-[#eaeaea] text-[15px]">{post.post}</h1>
           <Image
             src={post.image}
@@ -121,10 +134,16 @@ const Card = ({ post }: Props) => {
             alt=""
             className="w-full sm:h-[500px] h-[300px] sm:rounded-[30px] rounded-[20px]"
             priority
+            onClick={handlePostClick}
           />
-          <div className='flex gap-2'>
-            <FaRegHeart className="text-[#eaeaea] text-[15px] cursor-pointer" onClick={handleLike} />
-            <div className="text-[#eaeaea] text-[15px]">{likes} likes</div>
+          <div className='flex gap-6'>
+            <div className='flex gap-2'><FaRegHeart className="text-[#eaeaea] text-[15px] cursor-pointer " onClick={handleLike} />
+              <div className="text-[#eaeaea] text-[15px] mt-[-2px]">{likes}</div></div>
+
+            <div className="flex gap-2">
+              <FaRegCommentAlt className="text-[#eaeaea] text-[14px] cursor-pointer " onClick={handlePostClick} />
+              <div className="text-[#eaeaea] text-[15px] mt-[-2px]">{comment.length}</div>
+            </div>
           </div>
         </div>
 
@@ -153,7 +172,7 @@ const Card = ({ post }: Props) => {
                 </li>
                 <li
                   className="border border-red-400 p-3 rounded text-red-400 cursor-pointer"
-                  onClick={() => deletePosts(post)}
+                  onClick={deletePosts}
                 >
                   Delete
                 </li>
