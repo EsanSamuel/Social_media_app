@@ -10,7 +10,7 @@ import { usePathname } from "next/navigation";
 import Link from "next/link";
 import { CiUser } from "react-icons/ci";
 import { IoCreateOutline } from "react-icons/io5";
-import { FiLogOut } from "react-icons/fi";
+import { FiLogIn, FiLogOut } from "react-icons/fi";
 import { AiOutlineClose } from "react-icons/ai";
 
 type Provider = {

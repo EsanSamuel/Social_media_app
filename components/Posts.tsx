@@ -13,6 +13,7 @@ import {
   CarouselPrevious,
 } from "../@/components/ui/carousel"
 import UserCard from "./UserCard";
+import UserCarousel from "./UserCarousel";
 
 
 interface Props {
@@ -52,18 +53,8 @@ const Posts = () => {
         <Cardform data={post} />
       </div>
 
-      <div className='sm:hidden'>
-        <Carousel>
-          <CarouselContent>
-            {users.map((user: Record<string, any>) => (
-              <CarouselItem key={user._id} className='md:basis-1/2 lg:basis-1/3'>
-                <UserCard user={user} />
-              </CarouselItem>
-            ))}
-          </CarouselContent>
-          <CarouselPrevious />
-          <CarouselNext />
-        </Carousel>
+      <div className='sm:hidden mt-5'>
+        <UserCarousel />
       </div>
     </div>
   );

@@ -125,7 +125,7 @@ const Card = ({ post }: Props) => {
           />
           <div className='flex gap-2'>
             <FaRegHeart className="text-[#eaeaea] text-[15px] cursor-pointer" onClick={handleLike} />
-            <div className="text-[#eaeaea] text-[15px]">{liked ? <h1>{likes} likes</h1> : <h1>liked</h1>}</div>
+            <div className="text-[#eaeaea] text-[15px]">{likes} likes</div>
           </div>
         </div>
 

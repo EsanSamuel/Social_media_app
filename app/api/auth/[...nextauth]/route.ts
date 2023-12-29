@@ -3,11 +3,17 @@ import GoogleProvider from "next-auth/providers/google";
 import connectDB from "../../../../libs/connect";
 import User from "../../../../models/user";
 
-const handler = NextAuth({
+interface Profile {
+  name: string;
+  email: string;
+  picture: string;
+}
+
+const handler: AuthOptions = NextAuth({
   providers: [
     GoogleProvider({
-      clientId: process.env.GOOGLE_CLIENT_ID,
-      clientSecret: process.env.GOOGLE_CLIENT_SECRET,
+      clientId: process.env.GOOGLE_CLIENT_ID!,
+      clientSecret: process.env.GOOGLE_CLIENT_SECRET!,
     }),
   ],
   callbacks: {
@@ -19,7 +25,7 @@ const handler = NextAuth({
 
       return session;
     },
-    async signIn({ profile }) {
+    async signIn({ profile }: { profile: Profile }) {
       try {
         await connectDB();
 
