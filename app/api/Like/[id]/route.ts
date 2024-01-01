@@ -32,7 +32,8 @@ export const POST = async (
     });
 
     if (existingLike) {
-      return new Response("Something went wrong!", { status: 500 });
+      const removeLike = await Like.findByIdAndRemove(postId)
+      return new Response("Post deleted!", { status: 200 });
     } else {
       const like = await Like.create({
         poster: userId,

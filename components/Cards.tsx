@@ -186,7 +186,7 @@ const Card = ({ post }: Props) => {
       )}
 
       {editmodal && (
-        <div className="bg-[#13131a] h-auto fixed bottom-0 p-10 py-12 pt-14 rounded-t-[20px]  sm:w-[650px] w-full border-t border-r border-l border-[#5f5f5f]">
+        <div className="bg-[#13131a] h-auto bottom-0 p-10 py-12 pt-14 rounded-t-[20px]  sm:w-[650px] w-full border-t border-r border-l border-[#5f5f5f]">
           <IoCloseOutline
             className="text-[#eaeaea] text-[20px] cursor-pointer float-right mt-[-30px]"
             onClick={() => setEditModal(false)}
