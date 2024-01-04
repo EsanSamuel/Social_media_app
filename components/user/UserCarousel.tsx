@@ -1,15 +1,15 @@
 import React from "react"
-import { Card, CardContent } from "../@/components/ui/card"
+import { Card, CardContent } from "../../@/components/ui/card"
 import {
     Carousel,
     CarouselContent,
     CarouselItem,
     CarouselNext,
     CarouselPrevious,
-} from "../@/components/ui/carousel"
-import useUsers from "../hooks/useUsers"
+} from "../../@/components/ui/carousel"
+import useUsers from "../../hooks/useUsers"
 import Image from "next/image"
-import UserCard from "./UserCard"
+import UserCard from "../card/UserCard"
 
 const UserCarousel = () => {
     const { data: users = [] } = useUsers()

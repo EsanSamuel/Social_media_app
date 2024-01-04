@@ -8,7 +8,7 @@ import { IoCloseOutline } from "react-icons/io5";
 import axios from "axios";
 import { FaRegHeart, FaRegCommentAlt } from "react-icons/fa";
 import toast from "react-hot-toast";
-import { IValue, ToastContext } from "../context/ToastProvider";
+import { IValue, ToastContext } from "../../context/ToastProvider";
 
 interface Props {
   post: Record<string, any>;

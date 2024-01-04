@@ -75,11 +75,11 @@ const MobileNav = () => {
       </div>
 
       {modal && (
-        <div className="text-[#eaeaea] h-[120vh] bg-[#1c1c24] p-5 flex flex-col gap-5 w-auto pr-7 border-r fixed top-0 border-[#5f5f5f]">
+        <div className="text-[#eaeaea] h-[120vh] bg-[#1c1c24] p-5 flex flex-col gap-5 w-auto pr-7 border-r fixed top-0 border-[#5f5f5f] animate-slide-in">
           {/*<h1 className="flex gap-2 text-[25px]">
             <SiGoogleadmob className="mt-1" />
             Snapgram
-      </h1>*/}
+            </h1>*/}
           {session?.user && (
             <div className="mt-10 flex gap-2">
               <Image

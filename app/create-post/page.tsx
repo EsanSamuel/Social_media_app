@@ -1,16 +1,18 @@
 "use client";
 import Form from "../../components/Forms";
-import Sidebar from "../../components/Sidebar";
+import Sidebar from "../../components/nav/Sidebar";
 import axios from "axios";
 import React, { useState, useEffect } from "react";
 import { useSession } from "next-auth/react";
-import { useRouter } from "next/navigation";
+import { redirect, useRouter } from "next/navigation";
 
 const page = () => {
   const { data: session } = useSession();
   const [post, setPost] = useState("");
   const [image, setImage] = useState("");
   const router = useRouter();
+
+  if (!session?.user) redirect('/')
 
   const createPost = async () => {
     try {

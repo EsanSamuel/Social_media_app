@@ -1,6 +1,6 @@
 "use client";
 import React, { CSSProperties } from "react";
-import Card from "./Cards";
+import Card from "./card/Cards";
 import usePosts from "../hooks/usePosts";
 import Link from "next/link";
 import ClipLoader from "react-spinners/ClipLoader";

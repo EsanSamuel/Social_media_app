@@ -2,8 +2,8 @@
 import React, { useState, useEffect } from "react";
 import { useSession } from "next-auth/react";
 import axios from "axios";
-import Sidebar from "../../components/Sidebar";
-import SavedCard from "../../components/SavedCard";
+import Sidebar from "../../components/nav/Sidebar";
+import SavedCard from "../../components/card/SavedCard";
 
 const Saved = () => {
   const { data: session } = useSession();

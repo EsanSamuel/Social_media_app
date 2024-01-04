@@ -1,9 +1,9 @@
 "use client";
 import React, { useState, useEffect } from "react";
-import UserCard from "./UserCard";
+import UserCard from "../card/UserCard";
 import { useRouter } from "next/navigation";
 import { useSession } from "next-auth/react";
-import useUsers from "../hooks/useUsers";
+import useUsers from "../../hooks/useUsers";
 
 const Users = () => {
   const { data: session } = useSession();

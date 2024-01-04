@@ -6,7 +6,7 @@ import { BsThreeDots } from 'react-icons/bs'
 import Image from 'next/image'
 import { FaRegHeart } from 'react-icons/fa'
 import { useSession } from 'next-auth/react'
-import CommentCard from '../../components/CommentCard'
+import CommentCard from '../../components/card/CommentCard'
 import { toast } from 'react-hot-toast'
 
 const page = () => {
@@ -89,10 +89,18 @@ const page = () => {
                         alt=""
                         className="w-full sm:h-[500px] h-[300px] rounded-[30px]"
                     />
-                    <FaRegHeart className="text-[#eaeaea] text-[15px] cursor-pointer" />
+                    <div className='flex gap-2'>
+                        <FaRegHeart className="text-[#eaeaea] text-[15px] cursor-pointer" />
+                        <h1 className='text-[#eaeaea] text-[15px] top-[-2px]'>{post.likeCounts}</h1>
+                    </div>
                 </div>
 
 
+            </div>
+            <div className='pt-10 flex flex-col gap-3'>
+                <input onChange={(e) => setComment(e.target.value)} placeholder='Enter Comment...'
+                    className='text-white bg-transparent border border-b-[#5f5f5f] p-2 rounded w-full border-hidden outline-none' />
+                <button onClick={createComment} className='bg-[#8c6dfd] p-2 rounded text-white w-full rounded-[20px]'>Comment</button>
             </div>
             <div className='sm:p-10 pt-10'>
                 <h1 className='text-white pb-2'>Comments</h1>
@@ -110,11 +118,7 @@ const page = () => {
                     </div>
                 )}
             </div>
-            <div className='pt-10 flex gap-2'>
-                <input onChange={(e) => setComment(e.target.value)} placeholder='Enter Comment...'
-                    className='text-white bg-transparent border border-[#5f5f5f] p-2 rounded w-full ' />
-                <button onClick={createComment} className='bg-[#8c6dfd] p-2 rounded text-white'>Comment</button>
-            </div>
+
         </div>
     )
 }

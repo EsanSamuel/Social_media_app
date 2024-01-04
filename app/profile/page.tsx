@@ -1,11 +1,11 @@
 "use client";
 import React, { useState, useEffect } from "react";
-import Sidebar from "../../components/Sidebar";
+import Sidebar from "../../components/nav/Sidebar";
 import axios from "axios";
 import { useSession } from "next-auth/react";
 import Image from "next/image";
-import Card from "../../components/Cards";
-import Users from "../../components/Users";
+import Card from "../../components/card/Cards";
+import Users from "../../components/user/Users";
 import { useRouter } from "next/navigation";
 
 const page = () => {

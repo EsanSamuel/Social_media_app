@@ -5,6 +5,7 @@ import Image from 'next/image'
 import React, { useState, useEffect } from 'react'
 import toast from 'react-hot-toast'
 import { IoCloseOutline } from 'react-icons/io5'
+import { useRouter } from 'next/navigation'
 
 interface Props {
     comment: Record<string, any>
@@ -14,6 +15,7 @@ const CommentCard = ({ comment }: Props) => {
     const { data: session } = useSession()
     const [editComment, setEditComment] = useState('')
     const [editmodal, setEditModal] = useState(false)
+    const router = useRouter()
 
     const deleteComment = async () => {
         await axios.delete(`/api/comment/${comment._id}`)
@@ -25,7 +27,6 @@ const CommentCard = ({ comment }: Props) => {
             try {
                 const response = await axios.get(`/api/getcommentid/${comment._id}`)
                 setEditComment(response.data.comment)
-                console.log(response.data.comment)
             } catch (error) {
                 console.log(error)
             }
@@ -33,14 +34,17 @@ const CommentCard = ({ comment }: Props) => {
         getComment()
     }, [])
 
-
-
     const EditComment = async () => {
         await axios.patch(`/api/comment/${comment._id}`, {
             comment: editComment
         })
         toast.success('Comment edited!')
     }
+
+    const handleReplies = () => {
+        router.push(`/Replies?commentId=${comment._id}`)
+    }
+
     return (
         <div className='w-auto'>
             <div className='flex flex-col gap-3  rounded-[10px] p-2 text-[#eaeaea] w-auto'>
@@ -58,6 +62,7 @@ const CommentCard = ({ comment }: Props) => {
                         {session?.user?.id === (comment && comment.poster ? comment.poster._id : '') && (
                             <div className='flex gap-6 text-[#5f5f5f] text-[11px] cursor-pointer'>
                                 <h1 onClick={deleteComment}>Delete</h1>
+                                <><h1 onClick={handleReplies}>Reply</h1></>
                                 <><h1 onClick={() => setEditModal(true)}>Edit</h1></>
                             </div>
                         )}

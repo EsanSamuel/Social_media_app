@@ -1,11 +1,11 @@
 "use client";
 import React, { useState, useEffect } from "react";
-import Sidebar from "../../../components/Sidebar";
+import Sidebar from "../../../components/nav/Sidebar";
 import axios from "axios";
 import { useSession } from "next-auth/react";
 import Image from "next/image";
-import Card from "../../../components/Cards";
-import Users from "../../../components/Users";
+import Card from "../../../components/card/Cards";
+import Users from "../../../components/user/Users";
 import { useSearchParams } from "next/navigation";
 
 interface Params {
@@ -31,17 +31,17 @@ const page = ({ params }: { params: Params }) => {
   return (
     <div className="sm:p-5 sm:flex gap-5 w-full relative">
       <Sidebar />
-      <div className="sm:p-20  w-full">
+      <div className="sm:p-20 p-5 w-full">
         <Image
           src={userimage!}
           width={100}
           height={100}
           alt=""
-          className="sm:w-[150px] sm:h-[150px] w-[100px] h-[100px] rounded-full"
+          className="sm:w-[150px] sm:h-[150px] w-[100px] h-[100px] rounded-full sm:mt-0 mt-10"
         />
         <div className="mt-5  text-[25px]">
           <h1 className="text-[#eaeaea]">{username}</h1>
-          <h1 className="text-[#eaeaea] text-[15px]">{useremail}</h1>
+          <h1 className="text-[#eaeaea] text-[15px] pb-2">{useremail}</h1>
         </div>
         <hr />
 

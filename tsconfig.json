@@ -116,7 +116,7 @@
     ".next/types/**/*.ts",
     "**/*.ts",
     "**/*.tsx"
-, "components/Cards.tsx", "app/layout.tsx", "components/Provider.jsx", "components/Provider.jsx", "app/EditProfile/edits.jsx", "app/api/auth/[...nextauth]/route.ts", "app/api/auth/[...nextauth]/route.ts", "app/api/auth/[...nextauth]/route.ts"  ],
+, "components/card/Cards.tsx", "app/layout.tsx", "components/Provider.jsx", "components/Provider.jsx", "app/EditProfile/edits.jsx", "app/api/auth/[...nextauth]/route.ts", "app/api/auth/[...nextauth]/route.ts", "app/api/auth/[...nextauth]/route.ts"  ],
   "exclude": [
     "node_modules"
   ]
