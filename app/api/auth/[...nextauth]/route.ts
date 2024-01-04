@@ -18,9 +18,11 @@ const handler: AuthOptions = NextAuth({
   ],
   callbacks: {
     async session({ session }) {
+      //get the user's email
       const LoggedInUserSession = await User.findOne({
         email: session.user.email,
       });
+      //define session.user.id
       session.user.id = LoggedInUserSession._id.toString();
 
       return session;
@@ -42,7 +44,7 @@ const handler: AuthOptions = NextAuth({
         return true;
       } catch (error) {
         console.log(error);
-        return false
+        return false;
       }
     },
   },

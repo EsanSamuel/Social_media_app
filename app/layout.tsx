@@ -2,6 +2,7 @@ import "./globals.css";
 import React from 'react'
 import Provider from "../components/Providers";
 import { Toaster } from "react-hot-toast";
+import ToastProvider from "../context/ToastProvider";
 
 interface Props {
   children: React.ReactNode;
@@ -17,7 +18,11 @@ export default function RootLayout({ children }: Props) {
     <html lang="en">
       <body className="bg-[#13131a]">
         <Toaster />
-        <Provider>{children}</Provider>
+        <Provider>
+          <ToastProvider>
+            {children}
+          </ToastProvider>
+        </Provider>
       </body>
     </html>
   )
