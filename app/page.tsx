@@ -4,11 +4,11 @@ import Posts from "../components/Posts";
 import Sidebar from "../components/Sidebar";
 import Users from "../components/Users";
 import React, { useContext } from "react";
-import { ToastContext } from "../context/ToastProvider";
+import { IValue, ToastContext } from "../context/ToastProvider";
 import { ToastSuccess } from "../components/toast";
 
 const page = () => {
-  const { toastMsg } = useContext(ToastContext)
+  const { toastMsg } = useContext(ToastContext) as IValue
   return (
     <>
       <div className="sm:p-5 sm:flex gap-5 flex-row relative">

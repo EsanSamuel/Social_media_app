@@ -5,12 +5,12 @@ interface Props {
     children: React.ReactNode
 }
 
-interface IValue {
+export interface IValue {
     toastMsg: any
     setToastMsg: any
 }
 
-export const ToastContext = createContext<IValue>(null)
+export const ToastContext = createContext<IValue | null>(null)
 
 const ToastProvider = ({ children }: Props) => {
     const [toastMsg, setToastMsg] = useState()

@@ -1,5 +1,5 @@
 "use client";
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import Image from "next/image";
 import { useSession } from "next-auth/react";
 import { useRouter } from "next/navigation";
@@ -8,12 +8,14 @@ import { IoCloseOutline } from "react-icons/io5";
 import axios from "axios";
 import { FaRegHeart, FaRegCommentAlt } from "react-icons/fa";
 import toast from "react-hot-toast";
+import { IValue, ToastContext } from "../context/ToastProvider";
 
 interface Props {
   post: Record<string, any>;
 }
 
 const Card = ({ post }: Props) => {
+  const { setToastMsg } = useContext(ToastContext) as IValue
   const { data: session } = useSession();
   const [modal, setModal] = useState(false);
   const [editmodal, setEditModal] = useState(false);
@@ -40,6 +42,7 @@ const Card = ({ post }: Props) => {
       console.log(response.data);
       setModal(false);
       toast.success('Post saved!')
+      setToastMsg('Post saved!')
     } catch (error) {
       console.log(error);
     }
