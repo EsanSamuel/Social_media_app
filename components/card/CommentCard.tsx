@@ -14,6 +14,7 @@ interface Props {
 const CommentCard = ({ comment }: Props) => {
     const { data: session } = useSession()
     const [editComment, setEditComment] = useState('')
+    const [reply, setReply] = useState([])
     const [editmodal, setEditModal] = useState(false)
     const router = useRouter()
 
@@ -45,6 +46,18 @@ const CommentCard = ({ comment }: Props) => {
         router.push(`/Replies?commentId=${comment._id}`)
     }
 
+    useEffect(() => {
+        const getReply = async () => {
+            try {
+                const response = await axios.get(`/api/replycomments/${comment._id}`)
+                setReply(response.data)
+            } catch (error) {
+                console.log(error)
+            }
+        }
+        getReply()
+    }, [])
+
     return (
         <div className='w-auto'>
             <div className='flex flex-col gap-3  rounded-[10px] p-2 text-[#eaeaea] w-auto'>
@@ -65,6 +78,9 @@ const CommentCard = ({ comment }: Props) => {
                                 <><h1 onClick={handleReplies}>Reply</h1></>
                                 <><h1 onClick={() => setEditModal(true)}>Edit</h1></>
                             </div>
+                        )}
+                        {reply.length > 0 && (
+                            <h1 className='text-[#5f5f5f] text-[11px]'>{reply.length} {reply.length > 1 ? 'replies' : 'reply'}</h1>
                         )}
                     </div>
                 </div>

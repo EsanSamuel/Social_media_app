@@ -23,7 +23,7 @@ const Saved = () => {
       <Sidebar />
       <div className="sm:p-10 pt-5">
         <h1 className="text-[#eaeaea] text-[25px]">Your Saved Collections</h1>
-        <div className="grid xl:grid-cols-3 grid-cols-1 gap-3 mt-10">
+        <div className="grid xl:grid-cols-3 grid-cols-1 gap-5 mt-10">
           {posts.map((post: Record<string, any>) => (
             <div key={post._id} className="">
               <SavedCard post={post} />
