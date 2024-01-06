@@ -91,7 +91,7 @@ const page = () => {
                     />
                     <div className='flex gap-2'>
                         <FaRegHeart className="text-[#eaeaea] text-[15px] cursor-pointer" />
-                        <h1 className='text-[#eaeaea] text-[15px] top-[-2px]'>{post.likeCounts}</h1>
+                        <h1 className='text-[#eaeaea] text-[15px] mt-[-2px]'>{post.likeCounts}</h1>
                     </div>
                 </div>
 

@@ -48,7 +48,7 @@ const Sidebar = () => {
   }, []);
 
   return (
-    <div className="text-[#eaeaea] h-[95vh] sm:flex hidden flex flex-col gap-5 w-auto pr-7 border-r sticky top-5 border-[#5f5f5f]">
+    <div className="text-[#eaeaea] h-[95vh] md:flex hidden flex flex-col gap-5 w-auto pr-7 border-r sticky top-5 border-[#5f5f5f]">
       <h1 className="flex gap-2 text-[25px]">
         <SiGoogleadmob className="mt-1" />
         Snapgram

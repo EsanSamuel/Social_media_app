@@ -72,13 +72,16 @@ const CommentCard = ({ comment }: Props) => {
                     <div className='flex flex-col '>
                         <h1 className='text-[12px] text-[#5f5f5f]'>{comment && comment.poster ? comment.poster.username : ''}</h1>
                         <div className='text-[14px]'>{comment.comment}</div>
-                        {session?.user?.id === (comment && comment.poster ? comment.poster._id : '') && (
-                            <div className='flex gap-6 text-[#5f5f5f] text-[11px] cursor-pointer'>
-                                <h1 onClick={deleteComment}>Delete</h1>
-                                <><h1 onClick={handleReplies}>Reply</h1></>
-                                <><h1 onClick={() => setEditModal(true)}>Edit</h1></>
-                            </div>
-                        )}
+
+                        <div className='flex gap-6 text-[#5f5f5f] text-[11px] cursor-pointer'>
+                            {session?.user?.id === (comment && comment.poster ? comment.poster._id : '') && (
+                                <div className='flex gap-6 '>
+                                    <h1 onClick={deleteComment}>Delete</h1>
+                                    <><h1 onClick={() => setEditModal(true)}>Edit</h1></>
+                                </div>
+                            )}
+                            <><h1 onClick={handleReplies}>Reply</h1></>
+                        </div>
                         {reply.length > 0 && (
                             <h1 className='text-[#5f5f5f] text-[11px]'>{reply.length} {reply.length > 1 ? 'replies' : 'reply'}</h1>
                         )}
@@ -86,7 +89,7 @@ const CommentCard = ({ comment }: Props) => {
                 </div>
 
             </div>
-            <div className='mt-10'>
+            <div className='sm:mt-10'>
                 {editmodal && (
                     <div className="bg-[#13131a] h-auto bottom-0 p-10 py-12 pt-14 rounded-[20px]   w-full border border-[#5f5f5f]">
                         <IoCloseOutline
