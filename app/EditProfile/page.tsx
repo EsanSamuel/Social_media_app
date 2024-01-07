@@ -1,5 +1,5 @@
 "use client";
-import React, { ChangeEvent, useEffect, useState } from "react";
+import React, { ChangeEvent, FormEvent, useEffect, useState } from "react";
 import { useSearchParams } from "next/navigation";
 import axios from "axios";
 import { useSession } from "next-auth/react";
@@ -23,7 +23,8 @@ const page = () => {
     if (session?.user?.id) getUser();
   }, [session?.user?.id]);
 
-  const Edit = async () => {
+  const Edit = async (e: FormEvent) => {
+    e.preventDefault()
     try {
       const response = await axios.patch(`/api/user/${session?.user?.id}`, {
         username,

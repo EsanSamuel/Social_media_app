@@ -1,5 +1,5 @@
 "use client"
-import React, { useEffect, useState } from 'react'
+import React, { FormEvent, useEffect, useState } from 'react'
 import { useSearchParams } from 'next/navigation'
 import axios from 'axios'
 import { BsThreeDots } from 'react-icons/bs'
@@ -26,8 +26,8 @@ const page = () => {
         getPosts()
     }, [])
 
-    const createComment = async () => {
-        setComment('')
+    const createComment = async (e: FormEvent) => {
+        e.preventDefault()
         try {
             await axios.post('/api/comment/new', {
                 userId: session?.user?.id,

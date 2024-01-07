@@ -4,6 +4,7 @@ import Card from "./card/Cards";
 import usePosts from "../hooks/usePosts";
 import Link from "next/link";
 import ClipLoader from "react-spinners/ClipLoader";
+import Spinner from 'react-spinner-material';
 
 
 interface Props {
@@ -45,12 +46,12 @@ const Posts = () => {
     )
   }
   return (
-    <div className="sm:px-10 pt-10  overflow-y-auto p-5">
+    <div className="lg:px-10 md:pt-10 pt-[25%] overflow-y-auto p-5">
       <h1 className="text-[#eaeaea] sm:text-[25px] text-[22px]">Home Feed</h1>
       <Link href='/create-post'><button className="bg-[#8c6dfd] text-[#eaeaea] px-3 py-2 rounded sm:mt-5 float-right ">
         Create Post
       </button></Link>
-      <div className="sm:px-10 sm:py-20 pt-5">
+      <div className="lg:px-10 sm:py-20 pt-5">
         <Cardform data={post} />
       </div>
     </div>

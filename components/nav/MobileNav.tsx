@@ -49,8 +49,8 @@ const MobileNav = () => {
     setUpProvider();
   }, []);
   return (
-    <div>
-      <div className="sm:hidden pt-5 flex justify-between w-full p-5">
+    <div className='fixed w-full bg-[#13131a] mb-[20%]'>
+      <div className="md:hidden pt-5 flex justify-between w-full p-5">
         <h1 className="flex gap-2 text-[25px] text-[#eaeaea]">
           <SiGoogleadmob className="mt-1" />
           Snapgram

@@ -11,7 +11,7 @@ const page = () => {
   const { toastMsg } = useContext(ToastContext) as IValue
   return (
     <div className='w-full'>
-      <div className="sm:p-5 sm:flex gap-5 flex-row relative">
+      <div className="md:p-5 sm:flex gap-5 flex-row relative">
         <div className="w-auto">
           <Sidebar />
         </div>

@@ -6,10 +6,11 @@ interface Props {
   setPost: any;
   image: string;
   setImage: any;
-  createPost: () => void;
+  isLoading: boolean
+  createPost: any;
 }
 
-const Form = ({ post, setPost, image, setImage, createPost }: Props) => {
+const Form = ({ post, setPost, image, setImage, isLoading, createPost }: Props) => {
   const handleImageChange = (e: ChangeEvent<HTMLInputElement>) => {
     e.preventDefault();
     const file = e.target.files?.[0];
@@ -63,10 +64,10 @@ const Form = ({ post, setPost, image, setImage, createPost }: Props) => {
       />
 
       <button
-        className="w-full  py-3 bg-[#8c6dfd] rounded mt-5 text-white hover:opacity-50"
+        className={`w-full  py-3 bg-[#8c6dfd] rounded mt-5 text-white hover:opacity-50 ${isLoading && 'opacity-50'}`}
         onClick={createPost}
       >
-        Post
+        {isLoading ? 'Posting...' : 'Post'}
       </button>
     </div>
   );

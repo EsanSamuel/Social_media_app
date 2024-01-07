@@ -29,6 +29,7 @@
     "react-dom": "latest",
     "react-hot-toast": "^2.4.1",
     "react-icons": "^4.11.0",
+    "react-spinner-material": "^1.4.0",
     "react-spinners": "^0.13.8",
     "swr": "^2.2.4",
     "tailwind-merge": "^2.2.0",

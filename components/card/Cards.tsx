@@ -1,5 +1,5 @@
 "use client";
-import React, { useState, useEffect, useContext } from "react";
+import React, { useState, useEffect, useContext, FormEvent } from "react";
 import Image from "next/image";
 import { useSession } from "next-auth/react";
 import { useRouter } from "next/navigation";
@@ -113,22 +113,21 @@ const Card = ({ post }: Props) => {
     if (session?.user?.id) getUser()
   }, [session?.user?.id])
 
-  const createComment = async () => {
-    setComments('')
+  const createComment = async (e: FormEvent) => {
+    e.preventDefault()
     try {
       await axios.post('/api/comment/new', {
         userId: session?.user?.id,
         postId: post._id,
         comment: comments
       })
-
+      setComments('')
       toast.success('Comment posted!')
       window.location.reload()
     } catch (error) {
       console.log(error)
     }
   }
-
 
   return (
     <div>
@@ -174,25 +173,30 @@ const Card = ({ post }: Props) => {
               <div className="text-[#eaeaea] text-[15px] mt-[-2px]">{post.likeCounts}</div></div>
 
             <div className="flex gap-2">
-              <FaRegCommentAlt className="text-[#eaeaea] text-[14px] cursor-pointer " onClick={handlePostClick} />
+              <FaRegCommentAlt className="text-[#eaeaea] text-[15px] cursor-pointer " onClick={handlePostClick} />
               <div className="text-[#eaeaea] text-[15px] mt-[-2px]">{comment.length}</div>
             </div>
           </div>
         </div>
-        <div className='w-full mt-3 flex gap-2'>
-          <div className=''>
-            <Image
-              src={user.image}
-              width={100}
-              height={100}
-              alt=""
-              className="w-[35px] h-[35px] rounded-full"
-              priority
-            />
+        <div className='w-full sm:mt-3 mt-5 flex gap-3'>
+          <div className='rounded-full'>
+            {user.image ? (
+              <Image
+                src={user.image}
+                width={100}
+                height={100}
+                alt=""
+                className="w-[35px] h-[35px] rounded-full"
+                priority
+              />
+            ) : (
+              <div className="min-w-[35px] min-h-[35px] rounded-full border-[#5f5f5f]">
+              </div>
+            )}
           </div>
           <input className='w-full rounded-[20px] p-2 px-4 bg-[#13131a] outline-none text-[#eaeaea]' placeholder="Enter comment..."
             onChange={(e) => setComments(e.target.value)} />
-          <div className='bg-[#8c6dfd] p-2 rounded' onClick={createComment}>
+          <div className='bg-[#8c6dfd] p-2 rounded hover:opacity-50' onClick={createComment}>
             <AiOutlineSend className='text-[23px] text-[#eaeaea]' />
           </div>
         </div>
