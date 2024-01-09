@@ -131,7 +131,7 @@ const Card = ({ post }: Props) => {
 
   return (
     <div>
-      <div className="mt-10 border bg-[#1c1c24] border-[#5f5f5f] sm:rounded-[40px] rounded-[20px] sm:p-7 p-5" >
+      <div className="mt-10 border  border-neutral-800 sm:rounded-[40px] rounded-[20px] sm:p-7 p-5" >
         <div className="flex w-full justify-between gap-2">
           <div className="flex gap-2" onClick={handleClick}>
             <Image
@@ -194,7 +194,7 @@ const Card = ({ post }: Props) => {
               </div>
             )}
           </div>
-          <input className='w-full rounded-[20px] p-2 px-4 bg-[#13131a] outline-none text-[#eaeaea]' placeholder="Enter comment..."
+          <input className='w-full rounded-[20px]  p-2 px-4 bg-[#1c1c24] outline-none text-[#eaeaea]' placeholder="Enter comment..."
             onChange={(e) => setComments(e.target.value)} />
           <div className='bg-[#8c6dfd] p-2 rounded hover:opacity-50' onClick={createComment}>
             <AiOutlineSend className='text-[23px] text-[#eaeaea]' />
