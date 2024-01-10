@@ -37,7 +37,7 @@ const UserCard = ({ user }: Props) => {
         {user.username}
       </h1>
       <button
-        className="bg-[#8c6dfd] px-2 w-full py-2 rounded text-[#eaeaea] text-center text-[14px] mt-3"
+        className="bg-[#8c6dfd] px-2 w-full py-2 rounded text-[#eaeaea] text-center text-[14px] mt-3 hover:opacity-50"
         onClick={handleClick}
       >
         View

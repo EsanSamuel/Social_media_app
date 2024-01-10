@@ -1,3 +1,4 @@
+import { NextRequest } from "next/server";
 import connectDB from "../../../../libs/connect";
 import Post from "../../../../models/post";
 import { v2 as cloudinary } from "cloudinary";
@@ -14,7 +15,7 @@ interface PostData {
   image: string;
 }
 
-export const POST = async (request: Request) => {
+export const POST = async (request: NextRequest) => {
   const { userId, post, image }: PostData = await request.json();
   try {
     await connectDB();

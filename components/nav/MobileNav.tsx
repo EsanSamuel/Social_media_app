@@ -81,23 +81,25 @@ const MobileNav = () => {
             Snapgram
             </h1>*/}
           {session?.user && (
-            <div className="mt-10 flex gap-2">
-              <Image
-                src={user.image}
-                width={100}
-                height={100}
-                alt=""
-                className="w-[43px] h-[43px] rounded-full"
-                priority
-              />
-              <div className="flex flex-col">
-                <h1 className="text-[20px]">{user.username}</h1>
-                <br />
-                <p className="text-[12px] text-[#5f5f5f] mt-[-25px]">
-                  {/*{user.email}*/}
-                </p>
+            <Link href='/profile'>
+              <div className="mt-10 flex gap-2">
+                <Image
+                  src={user.image}
+                  width={100}
+                  height={100}
+                  alt=""
+                  className="w-[43px] h-[43px] rounded-full"
+                  priority
+                />
+                <div className="flex flex-col">
+                  <h1 className="text-[20px]">{user.username}</h1>
+                  <br />
+                  <p className="text-[12px] text-[#5f5f5f] mt-[-25px]">
+                    {/*{user.email}*/}
+                  </p>
+                </div>
               </div>
-            </div>
+            </Link>
           )}
 
           <div className="flex gap-10 flex-col mt-10 w-full">
@@ -113,18 +115,18 @@ const MobileNav = () => {
                   </li>
                 </Link>
               )}
-              {pathName === "/profile" ? (
-                <Link href="/profile">
+              {pathName === "/users" ? (
+                <Link href="/users">
                   <li className="py-3 pl-5 bg-[#8c6dfd] rounded cursor-pointer flex gap-2">
                     <CiUser className="text-[20px]" />
-                    Profile
+                    Users
                   </li>
                 </Link>
               ) : (
-                <Link href="/profile">
+                <Link href="/users">
                   <li className="py-3 pl-5  hover:bg-[#8c6dfd] rounded cursor-pointer flex gap-2">
                     <CiUser className="text-[20px]" />
-                    Profile
+                    Users
                   </li>
                 </Link>
               )}

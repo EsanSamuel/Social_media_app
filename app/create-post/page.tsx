@@ -28,6 +28,7 @@ const page = () => {
       console.log(response);
       toast.success('Post created!')
       router.push("/");
+      setIsLoading(false)
     } catch (error) {
       console.log(error);
     } finally {
@@ -36,7 +37,7 @@ const page = () => {
   };
 
   if (isLoading) toast.loading('Posting...')
-  
+
   return (
     <div className="sm:p-5 flex gap-5 w-full">
       <Sidebar />

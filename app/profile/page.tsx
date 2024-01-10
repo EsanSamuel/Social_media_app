@@ -1,5 +1,5 @@
 "use client";
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, FormEvent } from "react";
 import Sidebar from "../../components/nav/Sidebar";
 import axios from "axios";
 import { useSession } from "next-auth/react";
@@ -12,6 +12,7 @@ const page = () => {
   const { data: session } = useSession();
   const [user, setUser] = useState<any>("");
   const [posts, setPosts] = useState<any>([]);
+  const [bio, setBio] = useState('')
   const router = useRouter();
 
   useEffect(() => {
@@ -39,6 +40,18 @@ const page = () => {
     router.push(`/EditProfile?sessionId=${session?.user?.id}`);
   };
 
+  /*const createBio = async (e: FormEvent) => {
+    e.preventDefault()
+    try {
+      const response = await axios.post(`/api/bio/${session?.user?.id}`, {
+        bio
+      })
+      console.log(response.data)
+    } catch (error) {
+      console.log(error)
+    }
+  }*/
+
   return (
     <div className="sm:p-5 sm:flex gap-5 w-full relative">
       <Sidebar />
@@ -54,6 +67,14 @@ const page = () => {
           <div>
             <h1 className="text-[#eaeaea] text-[25px]">{user.username}(Me)</h1>
             <h1 className="text-[#eaeaea] sm:text-[15px] text-[13px]">{user.email}</h1>
+            {/* <div className='flex gap-2'>
+              <input className='w-full  p-2 bg-transparent text-[#eaeaea]'
+                onChange={(e) => setBio(e.target.value)}
+                value={bio} />
+              <div>
+                <button onClick={createBio}>Bio</button>
+              </div>
+            </div>*/}
           </div>
           <div className="">
             <button

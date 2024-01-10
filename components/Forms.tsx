@@ -32,7 +32,7 @@ const Form = ({ post, setPost, image, setImage, isLoading, createPost }: Props) 
     <div className="sm:px-20 p-5 w-full">
       <h1 className="text-[25px] text-[#eaeaea]">Create Post</h1>
       {!image ? (
-        <div className="w-auto min-h-[400px] border border-[#5f5f5f] rounded mt-10 border-dashed">
+        <div className="w-auto min-h-[400px] border border-neutral-800 rounded mt-10 border-dashed">
           <div>
             <h1 className="text-[#eaeaea] text-center mt-[100px]">
               Select Image
@@ -45,7 +45,7 @@ const Form = ({ post, setPost, image, setImage, isLoading, createPost }: Props) 
           </div>
         </div>
       ) : (
-        <div className="w-full min-h-[400px] border border-[#5f5f5f] rounded mt-10 border-dashed p-5">
+        <div className="w-full min-h-[400px] border border-neutral-800 rounded mt-10 border-dashed p-5">
           <Image
             src={image}
             width={1000}
@@ -57,7 +57,7 @@ const Form = ({ post, setPost, image, setImage, isLoading, createPost }: Props) 
       )}
 
       <input
-        className=" w-full mt-10 border border-[#5f5f5f] py-3 rounded bg-transparent px-2 text-white"
+        className=" w-full mt-10 border border-neutral-800 py-3 rounded bg-transparent px-2 text-white"
         onChange={(e) => setPost(e.target.value)}
         value={post}
         placeholder="Enter Post"
