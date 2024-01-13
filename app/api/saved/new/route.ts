@@ -1,5 +1,12 @@
 import connectDB from "../../../../libs/connect";
 import SavePost from "../../../../models/save";
+import { z } from "zod";
+
+const validationSchema = z.object({
+  userId: z.string().min(5),
+  postId: z.string().min(5),
+  ownerId: z.string().min(5),
+});
 
 interface PostData {
   userId: string;
@@ -8,7 +15,8 @@ interface PostData {
 }
 
 export const POST = async (request: Request) => {
-  const { userId, postId, ownerId }: PostData = await request.json();
+  const validate = validationSchema.parse(await request.json())
+  const { userId, postId, ownerId }: PostData = validate;
   try {
     await connectDB();
 
