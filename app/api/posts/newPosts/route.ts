@@ -2,6 +2,13 @@ import { NextRequest } from "next/server";
 import connectDB from "../../../../libs/connect";
 import Post from "../../../../models/post";
 import { v2 as cloudinary } from "cloudinary";
+import { z } from "zod";
+
+const validationSchema = z.object({
+  userId: z.string().min(5),
+  post: z.string().min(1).max(50),
+  image: z.string(),
+});
 
 cloudinary.config({
   cloud_name: process.env.CLOUDINARY_CLOUD_NAME,
@@ -16,7 +23,8 @@ interface PostData {
 }
 
 export const POST = async (request: NextRequest) => {
-  const { userId, post, image }: PostData = await request.json();
+  const validate = validationSchema.parse(await request.json());
+  const { userId, post, image }: PostData = validate;
   try {
     await connectDB();
 

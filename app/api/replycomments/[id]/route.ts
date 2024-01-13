@@ -1,3 +1,4 @@
+import { z } from "zod";
 import connectDB from "../../../../libs/connect";
 import Reply from "../../../../models/replies";
 
@@ -8,6 +9,10 @@ interface Params {
 interface ReplyItems {
   reply: string;
 }
+
+const validateReply = z.object({
+  reply: z.string().min(1),
+});
 
 export const GET = async (request: Request, { params }: { params: Params }) => {
   try {
@@ -28,7 +33,8 @@ export const PATCH = async (
   request: Request,
   { params }: { params: Params }
 ) => {
-  const { reply }: ReplyItems = await request.json();
+  const validate = validateReply.parse(await request.json());
+  const { reply }: ReplyItems = validate;
   try {
     await connectDB();
 

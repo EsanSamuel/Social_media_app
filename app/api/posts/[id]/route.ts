@@ -1,5 +1,10 @@
 import Post from "../../../../models/post";
 import connectDB from "../../../../libs/connect";
+import { z } from 'zod'
+
+const validatePost = z.object({
+  post:z.string().min(1).max(50)
+})
 
 interface Params {
   id: string;
@@ -38,7 +43,8 @@ export const PATCH = async (
   request: Request,
   { params }: { params: Params }
 ) => {
-  const { post }: PostData = await request.json();
+  const validate = validatePost.parse(await request.json())
+  const { post }: PostData = validate;
   try {
     const updatedPosts = await Post.findById(params.id);
 

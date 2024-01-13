@@ -1,5 +1,6 @@
 import Reply from "../../../../models/replies";
 import connectDB from "../../../../libs/connect";
+import { z } from "zod";
 
 interface ReplyData {
   userId: string;
@@ -7,15 +8,22 @@ interface ReplyData {
   reply: string;
 }
 
+const validateReply = z.object({
+  userId: z.string().min(5),
+  commentId: z.string().min(5),
+  reply: z.string().min(1).max(50),
+});
+
 export const POST = async (request: Request) => {
-  const { userId, commentId, reply }: ReplyData = await request.json();
+  const validate = validateReply.parse(await request.json());
+  const { userId, commentId, reply }: ReplyData = validate;
   try {
     await connectDB();
 
     const newReplies = new Reply({
       poster: userId,
       comment: commentId,
-      reply
+      reply,
     });
 
     await newReplies.save();
