@@ -6,6 +6,7 @@ import React, { useState, useEffect, FormEvent } from "react";
 import { useSession } from "next-auth/react";
 import { redirect, useRouter } from "next/navigation";
 import toast from "react-hot-toast";
+import { z } from 'zod'
 
 const page = () => {
   const { data: session } = useSession();
@@ -13,8 +14,9 @@ const page = () => {
   const [image, setImage] = useState("");
   const [isLoading, setIsLoading] = useState(false)
   const router = useRouter();
+  const sessionUser = session?.user?.id
 
-  if (!session?.user) redirect('/')
+  //if (!session?.user) redirect('/')
 
   const createPost = async (e: FormEvent) => {
     e.preventDefault()
@@ -36,7 +38,7 @@ const page = () => {
     }
   };
 
-  if (isLoading) toast.loading('Posting...')
+  //if (isLoading) toast.loading('Posting...')
 
   return (
     <div className="sm:p-5 flex gap-5 w-full">

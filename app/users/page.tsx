@@ -31,7 +31,7 @@ const users = () => {
                         }
                     }).map((user: Record<string, any>) => (
                         <div key={user._id} className=''>
-                            <UserCard user={user} />
+                            <UserCard user={user} hasBorder />
                         </div>
                     ))}
                 </div>

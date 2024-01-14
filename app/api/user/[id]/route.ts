@@ -1,6 +1,7 @@
 import User from "../../../../models/user";
 import connectDB from "../../../../libs/connect";
 import { v2 as cloudinary } from "cloudinary";
+import { z } from 'zod'
 
 interface Params {
   id: string;
@@ -10,6 +11,11 @@ interface PostData {
   username: string;
   image: string;
 }
+
+const validateUser = z.object({
+  username:z.string().min(1),
+  image:z.string().min(1)
+})
 
 cloudinary.config({
   cloud_name: process.env.CLOUDINARY_CLOUD_NAME,
@@ -32,7 +38,8 @@ export const PATCH = async (
   request: Request,
   { params }: { params: Params }
 ) => {
-  const { username, image }: PostData = await request.json();
+  const validate = validateUser.parse(await request.json())
+  const { username, image }: PostData = validate;
   try {
     connectDB();
     const ImageUrl = await cloudinary.uploader.upload(image);

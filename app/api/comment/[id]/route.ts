@@ -1,5 +1,6 @@
 import connectDB from "../../../../libs/connect";
 import Comment from "../../../../models/comment";
+import { z } from "zod";
 
 interface Params {
   id: string;
@@ -8,6 +9,10 @@ interface Params {
 interface CommentItems {
   comment: string;
 }
+
+const validateComment = z.object({
+  comment: z.string().min(1),
+});
 
 export const GET = async (request: Request, { params }: { params: Params }) => {
   try {
@@ -28,7 +33,8 @@ export const PATCH = async (
   request: Request,
   { params }: { params: Params }
 ) => {
-  const { comment }: CommentItems = await request.json();
+  const validate = validateComment.parse(await request.json());
+  const { comment }: CommentItems = validate;
   try {
     await connectDB();
 

@@ -10,6 +10,9 @@ import { FaRegHeart, FaRegCommentAlt } from "react-icons/fa";
 import toast from "react-hot-toast";
 import { IValue, ToastContext } from "../../context/ToastProvider";
 import { AiOutlineSend } from "react-icons/ai";
+import { z } from 'zod'
+import { useForm } from "react-hook-form";
+import { zodResolver } from '@hookform/resolvers/zod'
 
 interface Props {
   post: Record<string, any>;
@@ -21,7 +24,6 @@ const Card = ({ post }: Props) => {
   const [modal, setModal] = useState(false);
   const [editmodal, setEditModal] = useState(false);
   const [edit, setEdit] = useState("");
-  const [likes, setLikes] = useState(post.likes)
   const [comment, setComment] = useState([])
   const [user, setUser] = useState<any>('')
   const router = useRouter();
@@ -129,6 +131,32 @@ const Card = ({ post }: Props) => {
     }
   }
 
+  const schema = z.object({
+    edit: z.string().min(1, {
+      message: 'Post too short!'
+    })
+  })
+
+  type TSchema = z.infer<typeof schema>
+
+  const { register, handleSubmit, formState: { errors } } = useForm<TSchema>({
+    resolver: zodResolver(schema)
+  })
+
+  const onSubmit = async ({ edit }: TSchema) => {
+    try {
+      await axios.patch(`/api/posts/${post._id}`, {
+        post: edit,
+      });
+      setEditModal(false);
+      toast.success('Post edited!')
+      window.location.reload();
+    } catch (error) {
+      console.log(error);
+    }
+
+  }
+
   return (
     <div>
       <div className="mt-10 border  border-neutral-800 sm:rounded-[40px] rounded-[20px] sm:p-7 p-5" >
@@ -204,55 +232,68 @@ const Card = ({ post }: Props) => {
       </div>
 
       {modal && (
-        <div className="bg-[#13131a] h-auto fixed bottom-0 p-10 py-12 pt-14 rounded-t-[20px]  sm:w-[650px] w-full border-t border-r border-l border-neutral-800">
-          <IoCloseOutline
-            className="text-[#eaeaea] text-[20px] cursor-pointer float-right mt-[-30px]"
-            onClick={() => setModal(false)}
-          />
-          <ul className="flex flex-col gap-4">
-            <li
-              className="text-[#eaeaea] border border-[#5f5f5f] p-3 rounded cursor-pointer"
-              onClick={handleSave}
-            >
-              Save
-            </li>
-            {session?.user?.id === post.poster._id && (
-              <>
+        <div className="justify-center items-center flex overflow-x-hidden overflow-y-auto fixed inset-0 z-50 outline-none focus:outline-none bg-neutral-800 bg-opacity-70 ">
+
+          <div className='relative w-full lg:w-3/6 my-6 mx-auto lg:max-w-3xl h-full lg:h-auto'>
+            <div className='w-full lg:h-auto border-0 rounded-lg shadow-lg relative flex flex-col h-auto p-10 bg-[#13131a] outline-none focus:outline-none'>
+              <IoCloseOutline
+                className="text-[#eaeaea] text-[20px] cursor-pointer float-right mt-[-30px]"
+                onClick={() => setModal(false)}
+              />
+              <ul className="flex flex-col gap-4">
                 <li
                   className="text-[#eaeaea] border border-[#5f5f5f] p-3 rounded cursor-pointer"
-                  onClick={EditModal}
+                  onClick={handleSave}
                 >
-                  Edit
+                  Save
                 </li>
-                <li
-                  className="border border-red-400 p-3 rounded text-red-400 cursor-pointer"
-                  onClick={deletePosts}
-                >
-                  Delete
-                </li>
-              </>
-            )}
-          </ul>
+                {session?.user?.id === post.poster._id && (
+                  <>
+                    <li
+                      className="text-[#eaeaea] border border-[#5f5f5f] p-3 rounded cursor-pointer"
+                      onClick={EditModal}
+                    >
+                      Edit
+                    </li>
+                    <li
+                      className="border border-red-400 p-3 rounded text-red-400 cursor-pointer"
+                      onClick={deletePosts}
+                    >
+                      Delete
+                    </li>
+                  </>
+                )}
+              </ul>
+            </div>
+          </div>
         </div>
       )}
 
       {editmodal && (
-        <div className="bg-[#13131a] h-auto fixed bottom-0 p-10 py-12 pt-14 rounded-t-[20px]  sm:w-[650px] w-full border-t border-r border-l border-[#5f5f5f]">
-          <IoCloseOutline
-            className="text-[#eaeaea] text-[20px] cursor-pointer float-right mt-[-30px]"
-            onClick={() => setEditModal(false)}
-          />
-          <input
-            className="text-[#eaeaea] border border-[#5f5f5f] p-3 rounded bg-transparent w-full"
-            onChange={(e) => setEdit(e.target.value)}
-            value={edit}
-          />
-          <button
-            className="text-[#eaeaea] border border-[#5f5f5f] p-3 rounded bg-[#8c6dfd] mt-3  w-full"
-            onClick={handleEdit}
-          >
-            Edit
-          </button>
+        <div className="justify-center items-center flex overflow-x-hidden overflow-y-auto fixed inset-0 z-50 outline-none focus:outline-none bg-neutral-800 bg-opacity-70 ">
+
+          <div className='relative w-full lg:w-3/6 my-6 mx-auto lg:max-w-3xl h-full lg:h-auto'>
+            <form onSubmit={handleSubmit(onSubmit)} className='w-full lg:h-auto border-0 rounded-lg shadow-lg relative flex flex-col h-auto p-10 bg-[#13131a] outline-none focus:outline-none'>
+              <IoCloseOutline
+                className="text-[#eaeaea] text-[20px] cursor-pointer float-right mt-[-30px]"
+                onClick={() => setEditModal(false)}
+              />
+              <input
+                {...register('edit')}
+                className="text-[#eaeaea] border border-[#5f5f5f] p-3 rounded bg-transparent w-full"
+                onChange={(e) => setEdit(e.target.value)}
+                value={edit}
+              />
+              {errors.edit && <p className='mt-2 text-red'>{errors.edit.message}</p>}
+              <button
+                className="text-[#eaeaea] border border-[#5f5f5f] p-3 rounded bg-[#8c6dfd] mt-3  w-full"
+                // onClick={handleEdit}
+                type="submit"
+              >
+                Edit
+              </button>
+            </form>
+          </div>
         </div>
       )}
     </div>
