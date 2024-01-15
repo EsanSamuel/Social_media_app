@@ -19,16 +19,20 @@ const SavedCard = ({ post }: Props) => {
     router.push(`/PostDetails?postId=${post.post._id}`)
   }
   return (
-    <div className="bg-[#1c1c24] rounded-[30px] flex flex-col gap-5 p-5" >
+    <div className="bg-[#13131a] border border-neutral-800 rounded-[20px] flex flex-col gap-5 p-5" >
       <div className="flex w-full justify-between">
         <div className="flex gap-2">
-           <Image
-            src={post && post.owner ? post.owner.image : ''}
-            width={1000}
-            height={1000}
-            alt=""
-            className=" h-[30px] w-[30px] rounded-full"
-          />
+          {post.owner && post.owner.image ? (
+            <Image
+              src={post.owner.image}
+              width={1000}
+              height={1000}
+              alt=""
+              className=" h-[30px] w-[30px] rounded-full"
+            />
+          ) : (
+            <div className='min-h-[30px] min-w-[30px] rounded-full bg-[#1c1c24]'></div>
+          )}
           <div className="">
             <h1 className="text-[#eaeaea]">{post && post.owner ? post.owner.username : ''}</h1>
             <h1 className="text-[#5f5f5f] text-[13px]">{post && post.owner ? post.owner.email : ''}</h1>

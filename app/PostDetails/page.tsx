@@ -58,13 +58,17 @@ const page = () => {
             <div className="mt-10 border border-neutral-800 sm:rounded-[40px] rounded-[20px] sm:p-7 p-5">
                 <div className="flex w-full justify-between gap-2">
                     <div className="flex gap-2" >
-                        <Image
-                            src={post && post.poster ? post.poster.image : ''}
-                            width={100}
-                            height={100}
-                            alt=""
-                            className="w-[35px] h-[35px] rounded-full"
-                        />
+                        {post.poster && post.poster.image ? (
+                            <Image
+                                src={post.poster.image}
+                                width={100}
+                                height={100}
+                                alt=""
+                                className="w-[35px] h-[35px] rounded-full"
+                            />
+                        ) : (
+                            <div className='min-w-[35px] min-h-[35px] rounded-full bg-[#1c1c24]'></div>
+                        )}
                         <div className="flex flex-col">
                             <h1 className="text-[#eaeaea] text-[15px]">
                                 {post && post.poster ? post.poster.username : ''}
@@ -100,7 +104,7 @@ const page = () => {
             <div className='pt-10 flex flex-col gap-3'>
                 <input onChange={(e) => setComment(e.target.value)} placeholder='Enter Comment...'
                     className='text-white bg-transparent border border-b-[#5f5f5f] p-2 rounded w-full border-hidden outline-none' />
-                <button onClick={createComment} className='bg-[#8c6dfd] p-2 rounded text-white w-full rounded-[20px]'>Comment</button>
+                <button onClick={createComment} className='bg-[#8c6dfd] p-2 rounded text-white w-full rounded-[20px] hover:opacity-50'>Comment</button>
             </div>
             <div className='sm:p-10 pt-10'>
                 <h1 className='text-white pb-2'>Comments</h1>

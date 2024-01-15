@@ -7,6 +7,9 @@
 * {
   font-family: "Poppins", sans-serif;
 }
+.color {
+  background-color: linear-gradient(50%, #1da1f2, #0d90e0);
+}
 
 @layer base {
   :root {

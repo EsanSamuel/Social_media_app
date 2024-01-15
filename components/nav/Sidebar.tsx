@@ -56,14 +56,18 @@ const Sidebar = () => {
       {session?.user && (
         <Link href='/profile'>
           <div className="mt-10 flex gap-2">
-            <Image
-              src={user.image}
-              width={100}
-              height={100}
-              alt=""
-              className="w-[43px] h-[43px] rounded-full"
-              priority
-            />
+            {user.image ? (
+              <Image
+                src={user.image}
+                width={100}
+                height={100}
+                alt=""
+                className="w-[43px] h-[43px] rounded-full"
+                priority
+              />
+            ) : (
+              <div className='min-w-[43px] min-h-[43px] rounded-full bg-[#1c1c24]'></div>
+            )}
             <div className="flex flex-col">
               <h1 className="text-[20px]">{user.username}</h1>
               <br />

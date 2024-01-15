@@ -12,6 +12,7 @@ const users = () => {
             <div className='p-20 text-center text-[#eaeaea]'>Loading users...</div>
         )
     }
+    
     return (
         <div className="sm:p-5 sm:flex gap-5 w-full relative">
             <Sidebar />
