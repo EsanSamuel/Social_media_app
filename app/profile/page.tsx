@@ -65,7 +65,7 @@ const page = () => {
         />
         <div className="py-5 flex w-full justify-between">
           <div>
-            <h1 className="text-[#eaeaea] text-[25px]">{user.username}(Me)</h1>
+            <h1 className="text-[#eaeaea] text-[25px]">{user.username}</h1>
             <h1 className="text-[#eaeaea] sm:text-[15px] text-[13px]">{user.email}</h1>
             {/* <div className='flex gap-2'>
               <input className='w-full  p-2 bg-transparent text-[#eaeaea]'
