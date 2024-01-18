@@ -1,5 +1,5 @@
 "use client"
-import axios from 'axios'
+import api from '../../libs/api'
 import { useSession } from 'next-auth/react'
 import { redirect } from 'next/navigation'
 import Image from 'next/image'
@@ -17,7 +17,7 @@ const ReplyCard = ({ reply }: Props) => {
     const { data: session } = useSession()
     const handleDelete = async () => {
         try {
-            await axios.delete(`/api/replycomments/${reply._id}`)
+            await api.delete(`/api/replycomments/${reply._id}`)
         } catch (error) {
             console.log(error)
         }
@@ -27,7 +27,7 @@ const ReplyCard = ({ reply }: Props) => {
     const EditReply = async (e: FormEvent) => {
         e.preventDefault()
         try {
-            await axios.patch(`/api/replycomments/${reply._id}`, {
+            await api.patch(`/api/replycomments/${reply._id}`, {
                 reply: editReply
             })
             window.location.reload()
@@ -39,7 +39,7 @@ const ReplyCard = ({ reply }: Props) => {
 
     useEffect(() => {
         const getReply = async () => {
-            const response = await axios.get(`/api/getreply/${reply._id}`)
+            const response = await api.get(`/api/getreply/${reply._id}`)
             setEditReply(response.data.reply)
         }
         getReply()

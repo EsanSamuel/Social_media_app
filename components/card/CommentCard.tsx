@@ -1,5 +1,5 @@
 "use client"
-import axios from 'axios'
+import api from '../../libs/api'
 import { useSession } from 'next-auth/react'
 import Image from 'next/image'
 import React, { useState, useEffect } from 'react'
@@ -22,14 +22,14 @@ const CommentCard = ({ comment }: Props) => {
     const router = useRouter()
 
     const deleteComment = async () => {
-        await axios.delete(`/api/comment/${comment._id}`)
+        await api.delete(`/api/comment/${comment._id}`)
         toast.success('Comment deleted successfully!')
     }
 
     useEffect(() => {
         const getComment = async () => {
             try {
-                const response = await axios.get(`/api/getcommentid/${comment._id}`)
+                const response = await api.get(`/api/getcommentid/${comment._id}`)
                 setEditComment(response.data.comment)
             } catch (error) {
                 console.log(error)
@@ -49,7 +49,7 @@ const CommentCard = ({ comment }: Props) => {
     })
 
     const EditComment = async ({ editComment }: TSchema) => {
-        await axios.patch(`/api/comment/${comment._id}`, {
+        await api.patch(`/api/comment/${comment._id}`, {
             comment: editComment
         })
         toast.success('Comment edited!')
@@ -63,7 +63,7 @@ const CommentCard = ({ comment }: Props) => {
     useEffect(() => {
         const getReply = async () => {
             try {
-                const response = await axios.get(`/api/replycomments/${comment._id}`)
+                const response = await api.get(`/api/replycomments/${comment._id}`)
                 setReply(response.data)
             } catch (error) {
                 console.log(error)

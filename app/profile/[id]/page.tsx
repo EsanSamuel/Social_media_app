@@ -1,7 +1,7 @@
 "use client";
 import React, { useState, useEffect } from "react";
-import Sidebar from "../../../components/nav/Sidebar";
-import axios from "axios";
+import Sidebar from "../../../components/navbar/Sidebar";
+import api from '../../../libs/api'
 import { useSession } from "next-auth/react";
 import Image from "next/image";
 import Card from "../../../components/card/Cards";
@@ -22,7 +22,7 @@ const page = ({ params }: { params: Params }) => {
 
   useEffect(() => {
     const getUserPosts = async () => {
-      const response = await axios.get(`/api/users/${params?.id}/posts`);
+      const response = await api.get(`/api/users/${params?.id}/posts`);
       setPosts(response.data);
     };
     if (params?.id) getUserPosts();

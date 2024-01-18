@@ -1,10 +1,10 @@
 "use client";
 import React, { ChangeEvent, FormEvent, useEffect, useState } from "react";
 import { useSearchParams } from "next/navigation";
-import axios from "axios";
 import { useSession } from "next-auth/react";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
+import api from '../../libs/api'
 
 const page = () => {
   const { data: session } = useSession();
@@ -16,7 +16,7 @@ const page = () => {
 
   useEffect(() => {
     const getUser = async () => {
-      const response = await axios.get(`/api/user/${session?.user?.id}`);
+      const response = await api.get(`/api/user/${session?.user?.id}`);
       setUsername(response.data.username);
       setUser(response.data);
     };
@@ -26,7 +26,7 @@ const page = () => {
   const Edit = async (e: FormEvent) => {
     e.preventDefault()
     try {
-      const response = await axios.patch(`/api/user/${session?.user?.id}`, {
+      const response = await api.patch(`/api/user/${session?.user?.id}`, {
         username,
         image,
       });

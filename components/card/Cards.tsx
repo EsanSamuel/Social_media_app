@@ -5,7 +5,7 @@ import { useSession } from "next-auth/react";
 import { useRouter } from "next/navigation";
 import { BsThreeDots } from "react-icons/bs";
 import { IoCloseOutline } from "react-icons/io5";
-import axios from "axios";
+import api from "../../libs/api";
 import { FaRegHeart, FaRegCommentAlt } from "react-icons/fa";
 import toast from "react-hot-toast";
 import { IValue, ToastContext } from "../../context/ToastProvider";
@@ -33,13 +33,15 @@ const Card = ({ post }: Props) => {
     if (post.poster._id === session?.user?.id) return router.push("/profile");
 
     router.push(
-      `/profile/${post.poster._id}?name=${post.poster.username}&image=${post.poster.image}&email=${post.poster.email}`
+      `/profile/${post.poster._id}?name=${post.poster.username}
+       &image=${post.poster.image}
+       &email=${post.poster.email}`
     );
   };
 
   const handleSave = async () => {
     try {
-      const response = await axios.post("/api/saved/new", {
+      const response = await api.post("/api/saved/new", {
         userId: session?.user?.id,
         postId: post._id,
         ownerId: post.poster._id
@@ -47,19 +49,19 @@ const Card = ({ post }: Props) => {
       console.log(response.data);
       setModal(false);
       toast.success('Post saved!')
-      setToastMsg('Post saved!')
+      setToastMsg('')
     } catch (error) {
       console.log(error);
     }
   };
 
   const deletePosts = async () => {
-    await axios.delete(`/api/posts/${post._id}`);
+    await api.delete(`/api/posts/${post._id}`);
   };
 
   useEffect(() => {
     const getPost = async () => {
-      const response = await axios.get(`/api/posts/${post._id}`);
+      const response = await api.get(`/api/posts/${post._id}`);
       setEdit(response.data.post);
     };
 
@@ -73,7 +75,7 @@ const Card = ({ post }: Props) => {
 
   const handleEdit = async () => {
     try {
-      await axios.patch(`/api/posts/${post._id}`, {
+      await api.patch(`/api/posts/${post._id}`, {
         post: edit,
       });
       setEditModal(false);
@@ -89,7 +91,7 @@ const Card = ({ post }: Props) => {
 
   const handleLike = async () => {
     try {
-      await axios.post(`/api/Like/${post._id}`, {
+      await api.post(`/api/Like/${post._id}`, {
         userId: session?.user?.id
       })
       toast.success('Post liked!')
@@ -101,7 +103,7 @@ const Card = ({ post }: Props) => {
 
   useEffect(() => {
     const getComments = async () => {
-      const response = await axios.get(`/api/comment/${post._id}`)
+      const response = await api.get(`/api/comment/${post._id}`)
       setComment(response.data)
     }
     getComments()
@@ -109,7 +111,7 @@ const Card = ({ post }: Props) => {
 
   useEffect(() => {
     const getUser = async () => {
-      const response = await axios.get(`/api/user/${session?.user?.id}`)
+      const response = await api.get(`/api/user/${session?.user?.id}`)
       setUser(response.data)
     }
     if (session?.user?.id) getUser()
@@ -118,7 +120,7 @@ const Card = ({ post }: Props) => {
   const createComment = async (e: FormEvent) => {
     e.preventDefault()
     try {
-      await axios.post('/api/comment/new', {
+      await api.post('/api/comment/new', {
         userId: session?.user?.id,
         postId: post._id,
         comment: comments
@@ -145,7 +147,7 @@ const Card = ({ post }: Props) => {
 
   const onSubmit = async ({ edit }: TSchema) => {
     try {
-      await axios.patch(`/api/posts/${post._id}`, {
+      await api.patch(`/api/posts/${post._id}`, {
         post: edit,
       });
       setEditModal(false);

@@ -1,13 +1,13 @@
 "use client"
 import React, { FormEvent, useEffect, useState } from 'react'
 import { useSearchParams } from 'next/navigation'
-import axios from 'axios'
 import { BsThreeDots } from 'react-icons/bs'
 import Image from 'next/image'
 import { FaRegHeart } from 'react-icons/fa'
 import { useSession } from 'next-auth/react'
 import CommentCard from '../../components/card/CommentCard'
 import { toast } from 'react-hot-toast'
+import api from '../../libs/api'
 
 const page = () => {
     const { data: session } = useSession()
@@ -19,7 +19,7 @@ const page = () => {
 
     useEffect(() => {
         const getPosts = async () => {
-            const response = await axios.get(`/api/posts/${postId}`)
+            const response = await api.get(`/api/posts/${postId}`)
             setPost(response.data)
             console.log(response.data)
         }
@@ -29,7 +29,7 @@ const page = () => {
     const createComment = async (e: FormEvent) => {
         e.preventDefault()
         try {
-            await axios.post('/api/comment/new', {
+            await api.post('/api/comment/new', {
                 userId: session?.user?.id,
                 postId: postId,
                 comment
@@ -44,7 +44,7 @@ const page = () => {
 
     useEffect(() => {
         const getComment = async () => {
-            const response = await axios.get(`/api/comment/${postId}`)
+            const response = await api.get(`/api/comment/${postId}`)
             setAllComment(response.data)
             console.log(response.data)
         }

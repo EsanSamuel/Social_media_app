@@ -1,8 +1,8 @@
 "use client";
 import React, { useState, useEffect } from "react";
 import { useSession } from "next-auth/react";
-import axios from "axios";
-import Sidebar from "../../components/nav/Sidebar";
+import api from "../../libs/api";
+import Sidebar from "../../components/navbar/Sidebar";
 import SavedCard from "../../components/card/SavedCard";
 
 const Saved = () => {
@@ -11,7 +11,7 @@ const Saved = () => {
 
   useEffect(() => {
     const getSavedPosts = async () => {
-      const response = await axios.get(`/api/saved/${session?.user?.id}/posts`);
+      const response = await api.get(`/api/saved/${session?.user?.id}/posts`);
       setPosts(response.data);
       console.log(response.data);
     };

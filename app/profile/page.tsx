@@ -1,7 +1,7 @@
 "use client";
 import React, { useState, useEffect, FormEvent } from "react";
-import Sidebar from "../../components/nav/Sidebar";
-import axios from "axios";
+import Sidebar from "../../components/navbar/Sidebar";
+import api from '../../libs/api'
 import { useSession } from "next-auth/react";
 import Image from "next/image";
 import Card from "../../components/card/Cards";
@@ -17,7 +17,7 @@ const page = () => {
 
   useEffect(() => {
     const getUser = async () => {
-      const response = await axios.get(`/api/user/${session?.user?.id}`);
+      const response = await api.get(`/api/user/${session?.user?.id}`);
       setUser(response.data);
       console.log(response);
     };
@@ -26,14 +26,14 @@ const page = () => {
 
   useEffect(() => {
     const getUserPosts = async () => {
-      const response = await axios.get(`/api/users/${session?.user?.id}/posts`);
+      const response = await api.get(`/api/users/${session?.user?.id}/posts`);
       setPosts(response.data);
     };
     if (session?.user?.id) getUserPosts();
   }, [session?.user?.id]);
 
   const deletePosts = async (posts: any) => {
-    await axios.delete(`/api/posts/${posts._id}`);
+    await api.delete(`/api/posts/${posts._id}`);
   };
 
   const EditProfile = () => {

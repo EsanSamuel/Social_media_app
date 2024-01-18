@@ -1,7 +1,7 @@
 "use client"
 import React, { FormEvent, useState, useEffect } from 'react'
 import { useSearchParams } from 'next/navigation'
-import axios from 'axios'
+import api from '../../libs/api'
 import { useSession } from 'next-auth/react'
 import Image from 'next/image'
 import ReplyCard from '../../components/card/ReplyCard'
@@ -17,7 +17,7 @@ const Replies = () => {
     useEffect(() => {
         const getComment = async () => {
             try {
-                const response = await axios.get(`/api/getcommentid/${commentId}`)
+                const response = await api.get(`/api/getcommentid/${commentId}`)
                 console.log(response.data)
                 setComment(response.data)
             } catch (error) {
@@ -31,7 +31,7 @@ const Replies = () => {
     const createReply = async (e: FormEvent) => {
         e.preventDefault()
         try {
-            const response = await axios.post('/api/replycomments/new', {
+            const response = await api.post('/api/replycomments/new', {
                 userId: session?.user?.id,
                 commentId: commentId,
                 reply
@@ -45,7 +45,7 @@ const Replies = () => {
 
     useEffect(() => {
         const getReplies = async () => {
-            const response = await axios.get(`/api/replycomments/${commentId}`)
+            const response = await api.get(`/api/replycomments/${commentId}`)
             console.log(response.data)
             setAllReplies(response.data)
         }

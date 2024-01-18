@@ -1,5 +1,5 @@
 import React from "react";
-import axios from "axios";
+import api from "../../libs/api";
 import Image from "next/image";
 import { AiOutlineClose } from "react-icons/ai";
 import { useRouter } from "next/navigation";
@@ -11,7 +11,7 @@ interface Props {
 const SavedCard = ({ post }: Props) => {
   const router = useRouter()
   const deleteSavedPosts = async () => {
-    await axios.delete(`/api/saved/${post._id}/posts`);
+    await api.delete(`/api/saved/${post._id}/posts`);
     window.location.reload()
   };
 

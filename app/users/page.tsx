@@ -1,6 +1,6 @@
 "use client"
 import React, { useState } from 'react'
-import Sidebar from '../../components/nav/Sidebar'
+import Sidebar from '../../components/navbar/Sidebar'
 import useUsers from '../../hooks/useUsers'
 import UserCard from '../../components/card/UserCard'
 

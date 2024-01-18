@@ -1,12 +1,11 @@
 "use client";
 import Form from "../../components/Forms";
-import Sidebar from "../../components/nav/Sidebar";
-import axios from "axios";
+import Sidebar from "../../components/navbar/Sidebar";
 import React, { useState, useEffect, FormEvent } from "react";
 import { useSession } from "next-auth/react";
 import { redirect, useRouter } from "next/navigation";
 import toast from "react-hot-toast";
-import { z } from 'zod'
+import api from "../../libs/api";
 
 const page = () => {
   const { data: session } = useSession();
@@ -22,13 +21,13 @@ const page = () => {
     e.preventDefault()
     setIsLoading(true)
     try {
-      const response = await axios.post("/api/posts/newPosts", {
+      const response = await api.post("/api/posts/newPosts", {
         userId: session?.user?.id,
         post,
         image,
       });
       console.log(response);
-      toast.success('Post created!')
+      toast.success('Post created successfully!')
       router.push("/");
       setIsLoading(false)
     } catch (error) {

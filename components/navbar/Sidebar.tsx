@@ -2,7 +2,7 @@
 import React, { useState, useEffect } from "react";
 import { SiGoogleadmob } from "react-icons/si";
 import { useSession } from "next-auth/react";
-import axios from "axios";
+import api from '../../libs/api'
 import Image from "next/image";
 import { signIn, getProviders, signOut } from "next-auth/react";
 import { RiHomeLine } from "react-icons/ri";
@@ -32,7 +32,7 @@ const Sidebar = () => {
 
   useEffect(() => {
     const getUser = async () => {
-      const response = await axios.get(`/api/user/${session?.user?.id}`);
+      const response = await api.get(`/api/user/${session?.user?.id}`);
       setUser(response.data);
       console.log(response);
     };
