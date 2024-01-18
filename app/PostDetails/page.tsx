@@ -26,7 +26,7 @@ const PostDetails = () => {
             console.log(response.data)
         }
         getPosts()
-    }, [])
+    })
 
     const createComment = async (e: FormEvent) => {
         e.preventDefault()

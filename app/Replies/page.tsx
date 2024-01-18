@@ -25,7 +25,7 @@ const Replies = () => {
             }
         }
         getComment()
-    }, [])
+    })
 
 
     const createReply = async (e: FormEvent) => {
