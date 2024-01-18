@@ -12,7 +12,7 @@ interface Params {
   id: string;
 }
 
-const page = ({ params }: { params: Params }) => {
+const Profile = ({ params }: { params: Params }) => {
   const { data: session } = useSession();
   const [posts, setPosts] = useState<any>([]);
   const searchParams = useSearchParams();
@@ -62,4 +62,4 @@ const page = ({ params }: { params: Params }) => {
   );
 };
 
-export default page;
+export default Profile

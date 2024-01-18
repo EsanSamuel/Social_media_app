@@ -36,7 +36,7 @@ const CommentCard = ({ comment }: Props) => {
             }
         }
         getComment()
-    }, [])
+    })
 
     const schema = z.object({
         editComment: z.string().min(1)
@@ -70,7 +70,7 @@ const CommentCard = ({ comment }: Props) => {
             }
         }
         getReply()
-    }, [])
+    })
 
     return (
         <div className='w-auto'>

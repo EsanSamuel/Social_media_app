@@ -4,7 +4,7 @@ import Sidebar from '../../components/navbar/Sidebar'
 import useUsers from '../../hooks/useUsers'
 import UserCard from '../../components/card/UserCard'
 
-const users = () => {
+const Users = () => {
     const [searchUser, setSearchUser] = useState('')
     const { data: users = [], isLoading } = useUsers()
     if (isLoading) {
@@ -41,4 +41,4 @@ const users = () => {
     )
 }
 
-export default users
+export default Users

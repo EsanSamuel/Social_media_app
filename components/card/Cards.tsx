@@ -1,5 +1,5 @@
 "use client";
-import React, { useState, useEffect, useContext, FormEvent } from "react";
+import React, { useState, useEffect, useContext, FormEvent, useMemo } from "react";
 import Image from "next/image";
 import { useSession } from "next-auth/react";
 import { useRouter } from "next/navigation";
@@ -56,7 +56,12 @@ const Card = ({ post }: Props) => {
   };
 
   const deletePosts = async () => {
-    await api.delete(`/api/posts/${post._id}`);
+    try {
+      await api.delete(`/api/posts/${post._id}`);
+      setModal(false)
+    } catch (error) {
+      console.log(error)
+    }
   };
 
   useEffect(() => {
@@ -66,7 +71,7 @@ const Card = ({ post }: Props) => {
     };
 
     getPost();
-  }, []);
+  });
 
   const EditModal = () => {
     setEditModal(true);
@@ -107,7 +112,7 @@ const Card = ({ post }: Props) => {
       setComment(response.data)
     }
     getComments()
-  }, [])
+  })
 
   useEffect(() => {
     const getUser = async () => {
@@ -156,8 +161,14 @@ const Card = ({ post }: Props) => {
     } catch (error) {
       console.log(error);
     }
-
   }
+
+  /*const createdAt = useMemo(() => {
+    if (!post?.createdAt) {
+      return null
+    }
+    //return formatDistanceToNowStrict(new Date(post.createdAt))
+  }, [post?.createdAt])*/
 
   return (
     <div>

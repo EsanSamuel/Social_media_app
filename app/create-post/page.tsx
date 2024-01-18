@@ -7,7 +7,7 @@ import { redirect, useRouter } from "next/navigation";
 import toast from "react-hot-toast";
 import api from "../../libs/api";
 
-const page = () => {
+const CreatePost = () => {
   const { data: session } = useSession();
   const [post, setPost] = useState("");
   const [image, setImage] = useState("");
@@ -56,4 +56,4 @@ const page = () => {
   );
 };
 
-export default page;
+export default CreatePost

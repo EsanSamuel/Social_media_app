@@ -36,6 +36,8 @@ export const POST = async (request: NextRequest) => {
       image: ImageUrl.url,
     });
 
+    console.log(newPosts)
+
     await newPosts.save();
 
     return new Response(JSON.stringify(newPosts), { status: 201 });

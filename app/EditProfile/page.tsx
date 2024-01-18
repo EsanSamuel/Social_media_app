@@ -6,7 +6,7 @@ import Image from "next/image";
 import { useRouter } from "next/navigation";
 import api from '../../libs/api'
 
-const page = () => {
+const EditProfile = () => {
   const { data: session } = useSession();
   const searchParams = useSearchParams();
   const [user, setUser] = useState<any>("");
@@ -100,4 +100,4 @@ const page = () => {
   );
 };
 
-export default page;
+export default EditProfile;

@@ -8,8 +8,10 @@ import { useSession } from 'next-auth/react'
 import CommentCard from '../../components/card/CommentCard'
 import { toast } from 'react-hot-toast'
 import api from '../../libs/api'
+import Users from '../../components/user/Users'
+import Sidebar from '../../components/navbar/Sidebar'
 
-const page = () => {
+const PostDetails = () => {
     const { data: session } = useSession()
     const [post, setPost] = useState<any>('')
     const searchParams = useSearchParams()
@@ -54,77 +56,83 @@ const page = () => {
 
 
     return (
-        <div className='sm:px-[20%] p-5'>
-            <div className="mt-10 border border-neutral-800 sm:rounded-[40px] rounded-[20px] sm:p-7 p-5">
-                <div className="flex w-full justify-between gap-2">
-                    <div className="flex gap-2" >
-                        {post.poster && post.poster.image ? (
-                            <Image
-                                src={post.poster.image}
-                                width={100}
-                                height={100}
-                                alt=""
-                                className="w-[35px] h-[35px] rounded-full"
-                            />
-                        ) : (
-                            <div className='min-w-[35px] min-h-[35px] rounded-full bg-[#1c1c24]'></div>
-                        )}
-                        <div className="flex flex-col">
-                            <h1 className="text-[#eaeaea] text-[15px]">
-                                {post && post.poster ? post.poster.username : ''}
-                            </h1>
-                            <div>
-                                <p className="text-[13px] text-[#5f5f5f]">{post && post.poster ? post.poster.email : ''}</p>
+        <div className="sm:p-5 sm:flex gap-5 w-full flex-row relative">
+            <Sidebar />
+            <div className='sm:px-20 p-5'>
+                <div className="mt-10 border border-neutral-800 sm:rounded-[40px] rounded-[20px] sm:p-7 p-5">
+                    <div className="flex w-full justify-between gap-2">
+                        <div className="flex gap-2" >
+                            {post.poster && post.poster.image ? (
+                                <Image
+                                    src={post.poster.image}
+                                    width={100}
+                                    height={100}
+                                    alt=""
+                                    className="w-[35px] h-[35px] rounded-full"
+                                />
+                            ) : (
+                                <div className='min-w-[35px] min-h-[35px] rounded-full bg-[#1c1c24]'></div>
+                            )}
+                            <div className="flex flex-col">
+                                <h1 className="text-[#eaeaea] text-[15px]">
+                                    {post && post.poster ? post.poster.username : ''}
+                                </h1>
+                                <div>
+                                    <p className="text-[13px] text-[#5f5f5f]">{post && post.poster ? post.poster.email : ''}</p>
+                                </div>
                             </div>
                         </div>
-                    </div>
-                    <BsThreeDots
-                        className="text-[#eaeaea] text-[20px] cursor-pointer"
+                        <BsThreeDots
+                            className="text-[#eaeaea] text-[20px] cursor-pointer"
 
-                    />
+                        />
+                    </div>
+
+                    <div className="mt-5 flex flex-col gap-5">
+                        <h1 className="text-[#eaeaea] text-[15px]">{post.post}</h1>
+                        <Image
+                            src={post.image}
+                            width={1000}
+                            height={1000}
+                            alt=""
+                            className="w-full sm:h-[500px] h-[300px] rounded-[30px]"
+                        />
+                        <div className='flex gap-2'>
+                            <FaRegHeart className="text-[#eaeaea] text-[15px] cursor-pointer" />
+                            <h1 className='text-[#eaeaea] text-[15px] mt-[-2px]'>{post.likeCounts}</h1>
+                        </div>
+                    </div>
+
+
+                </div>
+                <div className='pt-10 flex flex-col gap-3'>
+                    <input onChange={(e) => setComment(e.target.value)} placeholder='Enter Comment...'
+                        className='text-white bg-transparent border border-b-[#5f5f5f] p-2 rounded w-full border-hidden outline-none' />
+                    <button onClick={createComment} className='bg-[#8c6dfd] p-2 rounded text-white w-full rounded-[20px] hover:opacity-50'>Comment</button>
+                </div>
+                <div className='sm:p-10 pt-10'>
+                    <h1 className='text-white pb-2'>Comments</h1>
+                    {allComment?.length > 0 ? (
+                        <>
+                            {allComment.map((comment: Record<string, any>) => (
+                                <div key={comment._id} className='w-auto'>
+                                    <CommentCard comment={comment} />
+                                </div>
+                            ))}
+                        </>
+                    ) : (
+                        <div>
+                            <h1 className='text-[#5f5f5f] sm:p-10 p-5 text-center'>No comments found!, Be the first to comment!</h1>
+                        </div>
+                    )}
                 </div>
 
-                <div className="mt-5 flex flex-col gap-5">
-                    <h1 className="text-[#eaeaea] text-[15px]">{post.post}</h1>
-                    <Image
-                        src={post.image}
-                        width={1000}
-                        height={1000}
-                        alt=""
-                        className="w-full sm:h-[500px] h-[300px] rounded-[30px]"
-                    />
-                    <div className='flex gap-2'>
-                        <FaRegHeart className="text-[#eaeaea] text-[15px] cursor-pointer" />
-                        <h1 className='text-[#eaeaea] text-[15px] mt-[-2px]'>{post.likeCounts}</h1>
-                    </div>
-                </div>
-
-
             </div>
-            <div className='pt-10 flex flex-col gap-3'>
-                <input onChange={(e) => setComment(e.target.value)} placeholder='Enter Comment...'
-                    className='text-white bg-transparent border border-b-[#5f5f5f] p-2 rounded w-full border-hidden outline-none' />
-                <button onClick={createComment} className='bg-[#8c6dfd] p-2 rounded text-white w-full rounded-[20px] hover:opacity-50'>Comment</button>
+            <div className=''>
+                <Users />
             </div>
-            <div className='sm:p-10 pt-10'>
-                <h1 className='text-white pb-2'>Comments</h1>
-                {allComment?.length > 0 ? (
-                    <>
-                        {allComment.map((comment: Record<string, any>) => (
-                            <div key={comment._id} className='w-auto'>
-                                <CommentCard comment={comment} />
-                            </div>
-                        ))}
-                    </>
-                ) : (
-                    <div>
-                        <h1 className='text-[#5f5f5f] sm:p-10 p-5 text-center'>No comments found!, Be the first to comment!</h1>
-                    </div>
-                )}
-            </div>
-
         </div>
     )
 }
 
-export default page
+export default PostDetails

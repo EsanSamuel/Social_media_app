@@ -7,7 +7,7 @@ import React, { useContext } from "react";
 import { IValue, ToastContext } from "../context/ToastProvider";
 import { ToastSuccess } from "../components/toast";
 
-const page = () => {
+const Page = () => {
   const { toastMsg } = useContext(ToastContext) as IValue
   return (
     <div className='w-full'>
@@ -30,4 +30,4 @@ const page = () => {
   );
 };
 
-export default page;
+export default Page;

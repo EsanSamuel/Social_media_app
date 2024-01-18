@@ -1,10 +1,11 @@
-import mongoose, { Schema, models, model } from "mongoose";
+import mongoose, { Schema, models, model, Document } from "mongoose";
 
-interface IPost {
+interface IPost extends Document {
   poster: mongoose.Types.ObjectId;
   post: string;
   image: string;
   likeCounts: number;
+  createdAt: any;
 }
 
 const PostSchema = new Schema<IPost>({
@@ -20,7 +21,14 @@ const PostSchema = new Schema<IPost>({
     type: String,
     required: true,
   },
-  likeCounts: { type: Number, default: 0 },
+  likeCounts: {
+    type: Number,
+    default: 0,
+  },
+  createdAt: {
+    type: String,
+    default: new Date(),
+  },
 });
 
 const Post = models.Post || model<IPost>("Post", PostSchema);

@@ -8,7 +8,7 @@ import Card from "../../components/card/Cards";
 import Users from "../../components/user/Users";
 import { useRouter } from "next/navigation";
 
-const page = () => {
+const MyProfile = () => {
   const { data: session } = useSession();
   const [user, setUser] = useState<any>("");
   const [posts, setPosts] = useState<any>([]);
@@ -107,4 +107,4 @@ const page = () => {
   );
 };
 
-export default page;
+export default MyProfile;

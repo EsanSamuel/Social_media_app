@@ -43,7 +43,7 @@ const ReplyCard = ({ reply }: Props) => {
             setEditReply(response.data.reply)
         }
         getReply()
-    }, [])
+    })
 
     return (
         <div>
