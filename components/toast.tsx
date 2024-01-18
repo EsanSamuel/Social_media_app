@@ -14,7 +14,7 @@ export const ToastSuccess = ({ msg }: Props) => {
     }, 3000);
 
     return () => clearInterval(timeOut);
-  }, []);
+  });
 
   return (
     <>
