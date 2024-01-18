@@ -50,7 +50,7 @@ const Replies = () => {
             setAllReplies(response.data)
         }
         getReplies()
-    }, [])
+    })
 
 
     return (

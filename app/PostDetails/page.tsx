@@ -51,7 +51,7 @@ const PostDetails = () => {
             console.log(response.data)
         }
         getComment()
-    }, [])
+    })
 
 
 
