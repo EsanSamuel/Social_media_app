@@ -19,7 +19,7 @@ const Saved = () => {
   }, [session?.user?.id]);
 
   return (
-    <div className="p-5 flex">
+    <div className="sm:p-5 flex">
       <Sidebar />
       <div className="sm:p-10 pt-5 px-1">
         <h1 className="text-[#eaeaea] text-[25px]">Your Saved Collections</h1>
