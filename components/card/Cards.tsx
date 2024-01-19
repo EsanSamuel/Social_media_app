@@ -70,8 +70,8 @@ const Card = ({ post }: Props) => {
       setEdit(response.data.post);
     };
 
-    getPost();
-  });
+   if(post._id) getPost();
+  },[post._id]);
 
   const EditModal = () => {
     setEditModal(true);
