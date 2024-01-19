@@ -46,7 +46,7 @@ const Posts = () => {
     )
   }
   return (
-    <div className="lg:px-10 md:pt-10 pt-[25%] overflow-y-auto p-5">
+    <div className="lg:px-10 md:pt-10 pt-[25%] overflow-y-auto p-1">
       <h1 className="text-[#eaeaea] sm:text-[25px] text-[22px]">Home Feed</h1>
       <Link href='/create-post'><button className="bg-[#8c6dfd] text-[#eaeaea] px-3 py-2 rounded sm:mt-5 float-right ">
         Create Post
