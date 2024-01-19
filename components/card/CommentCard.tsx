@@ -35,8 +35,8 @@ const CommentCard = ({ comment }: Props) => {
                 console.log(error)
             }
         }
-        getComment()
-    })
+      if (comment._id) getComment()
+    },[comment._id])
 
     const schema = z.object({
         editComment: z.string().min(1)
