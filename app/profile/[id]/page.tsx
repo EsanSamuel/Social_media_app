@@ -41,7 +41,7 @@ const Profile = ({ params }: { params: Params }) => {
         />
         <div className="mt-5  text-[25px]">
           <h1 className="text-[#eaeaea]">{username}</h1>
-          <h1 className="text-[#eaeaea] text-[15px] pb-2">{useremail}</h1>
+          <h1 className="text-[#eaeaea] sm:text-[15px] text-[13px] pb-2">{useremail}</h1>
         </div>
         <hr />
 
