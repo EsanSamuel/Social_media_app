@@ -172,7 +172,7 @@ const Card = ({ post }: Props) => {
 
   return (
     <div>
-      <div className="mt-10 border  border-neutral-800 sm:rounded-[40px] rounded-[20px] sm:p-7 p-5" >
+      <div className="mt-10 border  border-neutral-800 sm:rounded-[40px] rounded-[20px] sm:p-7 p-2" >
         <div className="flex w-full justify-between gap-2">
           <div className="flex gap-2" onClick={handleClick}>
             {post.poster.image ? (
