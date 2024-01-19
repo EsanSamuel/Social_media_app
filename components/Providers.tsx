@@ -5,7 +5,7 @@ import React from "react";
 
 interface Props {
   children: React.ReactNode;
-  session: Session;
+  session?: Session;
 }
 const Provider = ({ session, children }: Props) => {
   return <SessionProvider session={session}>{children}</SessionProvider>;
