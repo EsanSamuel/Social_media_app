@@ -2,12 +2,7 @@ import { AuthOptions } from "next-auth";
 import GoogleProvider from "next-auth/providers/google";
 import connectDB from "../libs/connect";
 import User from "../models/user";
-
-interface Profile {
-  name: string;
-  email: string;
-  picture: string;
-}
+import { IUser } from "../types/next-auth";
 
 export const authOptions: AuthOptions = {
   providers: [
@@ -27,21 +22,21 @@ export const authOptions: AuthOptions = {
 
       return session;
     },
-    async signIn({ profile }: { profile: Profile }) {
+    async signIn({ user }: IUser): Promise<boolean> {
       try {
         await connectDB();
 
-        const existingUser = await User.findOne({ email: profile.email });
+        const existingUser = await User.findOne({ email: user.email });
 
         if (!existingUser) {
           User.create({
-            username: profile.name,
-            image: profile.picture,
-            email: profile.email,
+            username: user.name,
+            image: user.image,
+            email: user.email,
           });
         }
 
-        console.log('Signed in!')
+        console.log("Signed in successfully!");
         return true;
       } catch (error) {
         console.log(error);

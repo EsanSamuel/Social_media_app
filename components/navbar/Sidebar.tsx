@@ -69,7 +69,7 @@ const Sidebar = () => {
               <div className='min-w-[43px] min-h-[43px] rounded-full bg-[#1c1c24]'></div>
             )}
             <div className="flex flex-col">
-              <h1 className="text-[20px]">{user.username}</h1>
+              <h1 className="text-[20px] leading-[40px] line-clamp-1">{user.username}</h1>
               <br />
               <p className="text-[12px] text-[#5f5f5f] mt-[-25px]">
                 {/*{user.email}*/}
