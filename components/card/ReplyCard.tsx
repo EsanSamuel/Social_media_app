@@ -42,8 +42,8 @@ const ReplyCard = ({ reply }: Props) => {
             const response = await api.get(`/api/getreply/${reply._id}`)
             setEditReply(response.data.reply)
         }
-        getReply()
-    })
+        if(reply._id) getReply()
+    },[reply._id])
 
     return (
         <div>
