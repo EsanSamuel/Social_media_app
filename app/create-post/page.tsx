@@ -15,7 +15,7 @@ const CreatePost = () => {
   const router = useRouter();
   const sessionUser = session?.user?.id
 
-  //if (!session?.user) redirect('/')
+  if (!session?.user) redirect('/')
 
   const createPost = async (e: FormEvent) => {
     e.preventDefault()
