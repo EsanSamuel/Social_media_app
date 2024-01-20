@@ -224,7 +224,7 @@ const Card = ({ post }: Props) => {
             </div>
           </div>
         </div>
-        <div className='w-full sm:mt-3 mt-5 flex gap-1'>
+        <div className='w-full sm:mt-3 mt-5 flex gap-3'>
           <div className='rounded-full'>
             {user.image ? (
               <Image
