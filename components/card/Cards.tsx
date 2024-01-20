@@ -59,6 +59,7 @@ const Card = ({ post }: Props) => {
     try {
       await api.delete(`/api/posts/${post._id}`);
       setModal(false)
+      window.location.reload()
     } catch (error) {
       console.log(error)
     }
