@@ -1,6 +1,8 @@
 import connectDB from "../../../libs/connect";
 import Post from "../../../models/post";
 
+export const dynamic = "force-dynamic"
+
 export const GET = async (request: Request) => {
   try {
     await connectDB();
