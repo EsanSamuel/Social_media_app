@@ -1,6 +1,8 @@
 import User from "../../../models/user";
 import connectDB from "../../../libs/connect";
 
+export const dynamic = "force-dynamic"
+
 export const GET = async (request: Request) => {
   try {
     connectDB();
