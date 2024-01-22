@@ -19,7 +19,7 @@ const override: CSSProperties = {
 
 const Cardform = ({ data }: Props) => (
   <div>
-    {data.reverse().map((post: Record<string, any>) => (
+    {data.map((post: Record<string, any>) => (
       <div key={post._id}>
         <Card post={post} />
       </div>
