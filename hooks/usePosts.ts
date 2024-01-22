@@ -3,8 +3,8 @@ import fetcher from "../libs/axios";
 
 const usePosts = () => {
   const { data, isLoading, error, mutate } = useSWR("/api/posts", fetcher , {
-    revalidateOnReconnect: true,
-    revalidateOnFocus: true,
+    revalidateOnReconnect: false,
+    revalidateOnFocus: false,
   });
 
   return {
