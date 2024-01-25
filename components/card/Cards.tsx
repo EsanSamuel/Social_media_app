@@ -232,7 +232,7 @@ const Card = ({ post }: Props) => {
                 width={100}
                 height={100}
                 alt=""
-                className="w-[35px] h-[35px] rounded-full"
+                className="w-[25px] h-[25px] rounded-full"
                 priority
               />
             ) : (
