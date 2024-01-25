@@ -224,7 +224,7 @@ const Card = ({ post }: Props) => {
             </div>
           </div>
         </div>
-        <div className='w-full sm:mt-3 mt-5 flex gap-3'>
+        <div className='w-full sm:mt-3 mt-5 flex gap-2'>
           <div className='rounded-full'>
             {user.image ? (
               <Image
@@ -232,7 +232,7 @@ const Card = ({ post }: Props) => {
                 width={100}
                 height={100}
                 alt=""
-                className="w-[25px] h-[25px] rounded-full"
+                className="w-[35px] h-[35px] rounded-[10px]"
                 priority
               />
             ) : (
