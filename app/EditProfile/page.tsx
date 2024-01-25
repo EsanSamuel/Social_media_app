@@ -76,7 +76,7 @@ const EditProfile = () => {
       </div>
       <div className="rounded text-[#eaeaea] ">
         <h1 className='py-2 px-4 rounded text-[#eaeaea] bg-[#8c6dfd]'>Select Image</h1>
-        <input className=" opacity-0" onChange={handleImageChange} type="file" />
+        <input className=" opacity-0 h-full" onChange={handleImageChange} type="file" />
       </div>
 
       <label className='w-full text-[#eaeaea]'>
