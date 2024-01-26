@@ -33,9 +33,7 @@ const Card = ({ post }: Props) => {
     if (post.poster._id === session?.user?.id) return router.push("/profile");
 
     router.push(
-      `/profile/${post.poster._id}?name=${post.poster.username}
-       &image=${post.poster.image}
-       &email=${post.poster.email}`
+      `/profile/${post.poster._id}?name=${post.poster.username}&image=${post.poster.image}&email=${post.poster.email}`
     );
   };
 
