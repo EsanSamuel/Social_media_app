@@ -1,6 +1,6 @@
-import mongoose, { Schema, models, model } from "mongoose";
+import mongoose, { Schema, models, model, Document } from "mongoose";
 
-interface ISave {
+interface ISave extends Document {
   poster: mongoose.Types.ObjectId;
   post: mongoose.Types.ObjectId;
   owner: mongoose.Types.ObjectId;
