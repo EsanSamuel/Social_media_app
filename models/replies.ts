@@ -1,6 +1,6 @@
-import mongoose, { Schema, models, model } from "mongoose";
+import mongoose, { Schema, models, model, Document } from "mongoose";
 
-interface IReply {
+interface IReply extends Document {
   poster: mongoose.Types.ObjectId;
   comment: mongoose.Types.ObjectId;
   reply: string;
