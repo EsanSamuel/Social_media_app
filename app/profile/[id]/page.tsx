@@ -41,12 +41,20 @@ const [user,setUser] = useState<any>('')
     <div className="sm:p-5 sm:flex gap-5 w-full relative">
       <Sidebar />
       <div className="sm:p-20 p-1 w-full">
+          {!user.coverImage ? <div className='sm:min-h-[200px] min-h-[150px] bg-[#1c1c24] rounded'></div> : 
+             <Image 
+               src={user.coverImage} 
+               width={1000} 
+               height={1000} 
+               alt="" 
+               className='sm:min-h-[200px] min-h-[150px] sm:max-h-[200px] max-h-[150px] rounded' /> 
+           }
         <Image
           src={userimage!}
           width={100}
           height={100}
           alt=""
-          className="sm:w-[150px] sm:h-[150px] w-[100px] h-[100px] rounded-full sm:mt-0 mt-10"
+          className="sm:w-[150px] sm:h-[150px] w-[100px] h-[100px] rounded-full sm:mt-[-10px] mt-[-17px]"
         />
         <div className="mt-5  text-[25px]">
           <h1 className="text-[#eaeaea]">{username}</h1>
