@@ -67,7 +67,7 @@ const MyProfile = () => {
         coverImage
       }
       console.log(response.data)
-      setOpenModal(false)
+      
     } catch (error) {
       console.log(error)
     }
