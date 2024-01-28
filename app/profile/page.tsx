@@ -78,13 +78,13 @@ const MyProfile = () => {
       <div className="sm:p-5 sm:flex gap-5 w-full relative">
         <Sidebar />
         <div className="sm:p-20 p-1 w-full">
-          {!user.coverImage ? <div className='sm:min-h-[200px] min-h-[110px] bg-[#1c1c24] rounded'></div> :
+          {!user.coverImage ? <div className='sm:min-h-[200px] min-h-[150px] bg-[#1c1c24] rounded'></div> :
             <Image
               src={user.coverImage}
               width={1000}
               height={1000}
               alt=""
-              className='sm:min-h-[200px] min-h-[110px] rounded' />
+              className='sm:min-h-[200px] min-h-[150px] sm:max-h-[200px] max-h-[150px] rounded' />
           }
           <Image
             src={user.image}
