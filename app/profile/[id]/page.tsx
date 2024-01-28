@@ -15,6 +15,7 @@ interface Params {
 const Profile = ({ params }: { params: Params }) => {
   const { data: session } = useSession();
   const [posts, setPosts] = useState<any>([]);
+const [user,setUser] = useState<any>('')
   const searchParams = useSearchParams();
   const username = searchParams.get("name");
   const userimage = searchParams.get("image");
@@ -27,6 +28,14 @@ const Profile = ({ params }: { params: Params }) => {
     };
     if (params?.id) getUserPosts();
   }, [params?.id]);
+
+  useEffect(() => { 
+     const getUser = async () => { 
+       const response = await api.get(`/api/user/${params?.id}`); 
+       setUser(response.data); 
+     }; 
+     if (params?.id) getUser(); 
+   }, [params?.id]);
 
   return (
     <div className="sm:p-5 sm:flex gap-5 w-full relative">
