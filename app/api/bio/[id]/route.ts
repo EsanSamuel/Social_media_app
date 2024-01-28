@@ -26,6 +26,7 @@ const ImageUrl = await cloudinary.uploader.upload(coverImage)
     }
     user.bio = bio;
     user.coverImage = ImageUrl.url
+    await user.save()
     return new Response(JSON.stringify(user), { status: 201 });
   } catch (error) {
     console.log(error);
