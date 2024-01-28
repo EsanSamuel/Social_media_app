@@ -4,6 +4,8 @@ interface IUser extends Document {
   username: string;
   image: string;
   email: string;
+  bio: string;
+  coverImage: string
 }
 
 //defining a model for user when signed in
@@ -19,6 +21,12 @@ const UserSchema = new Schema<IUser>({
   email: {
     type: String,
     required: true,
+  },
+  bio:{
+    type: String 
+  },
+  coverImage: {
+    type:String
   }
 });
 
