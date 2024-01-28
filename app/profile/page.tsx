@@ -66,8 +66,8 @@ const MyProfile = () => {
         bio,
         coverImage
       }
-setOpenModal(false)
       console.log(response.data)
+      setOpenModal(false)
     } catch (error) {
       console.log(error)
     }
