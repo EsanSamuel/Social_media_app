@@ -65,9 +65,9 @@ const MyProfile = () => {
       const response = await api.post(`/api/bio/${session?.user?.id}`, {
         bio,
         coverImage
-      }
+      })
       console.log(response.data)
-      
+      setOpenModal(false)
     } catch (error) {
       console.log(error)
     }
