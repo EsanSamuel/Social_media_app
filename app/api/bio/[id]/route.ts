@@ -22,7 +22,7 @@ const ImageUrl = await cloudinary.uploader.upload(coverImage)
     await connectDB();
     const user = await User.findById(params.id);
     if (!user) {
-      return new Response("User not found!", { status: 404 });
+      return new Response("User not found!", { status: 201 });
     }
     user.bio = bio;
     user.coverImage = ImageUrl.url
