@@ -181,7 +181,7 @@ const EditProfile = () => {
             className="py-2 px-4 rounded text-[#eaeaea] bg-[#8c6dfd] w-full"
             onClick={EditBio}
           >
-            Edit Profile
+            Edit
           </button>
 
         </div>
