@@ -28,6 +28,8 @@ const Card = ({ post }: Props) => {
   const [user, setUser] = useState<any>('')
   const router = useRouter();
   const [comments, setComments] = useState('')
+  const [userLikes, setUserLikes] = useState([])
+  const [openLikes, setOpenLikes] = useState(false)
 
   const handleClick = () => {
     if (post.poster._id === session?.user?.id) return router.push("/profile");
@@ -104,6 +106,15 @@ const Card = ({ post }: Props) => {
       console.log(error)
     }
   }
+  
+  useEffect(() => {
+    const getLikes = async () => {
+      const response = await api.get(`/api/Like/${post._id}`)
+      setUserLikes(response.data)
+      console.log(response.data)
+    }
+    if (post._id) getLikes()
+  }, [post._id])
 
   useEffect(() => {
     const getComments = async () => {
@@ -310,6 +321,44 @@ const Card = ({ post }: Props) => {
                 Edit
               </button>
             </form>
+          </div>
+        </div>
+      )}
+
+         {openLikes && (
+        <div className="justify-center items-center flex overflow-x-hidden overflow-y-auto fixed inset-0 z-50 outline-none focus:outline-none bg-neutral-800 bg-opacity-70 ">
+          <div className='relative w-full lg:w-3/6 my-6 mx-auto lg:max-w-3xl h-full lg:h-auto'>
+            <div className='w-full lg:h-auto border-0 rounded-lg shadow-lg relative flex flex-col gap-6 h-auto p-10 bg-[#13131a] outline-none focus:outline-none'>
+              <IoCloseOutline
+                className="text-[#eaeaea] text-[20px] cursor-pointer float-right "
+                onClick={() => setOpenLikes(false)}
+              />
+              {userLikes.length > 0 ?
+                <div className='flex flex-col gap-5'>
+                  <h1 className='text-white'>People who liked</h1>
+                  {userLikes.map((like: Record<string, any>) => {
+                    const handleProfile = () => {
+                      if (like.poster._id === session?.user?.id) return router.push("/profile");
+
+                      router.push(
+                        `/profile/${like.poster._id}?name=${like.poster.username}&image=${like.poster.image}&email=${like.poster.email}`
+                      );
+                    }
+                    return (
+                      <div key={like._id} className='flex justify-between text-white'>
+                        <div className="flex gap-3">
+                          <Image src={like && like.poster ? like.poster.image : ''} width={100} height={100} className='rounded-full w-[35px] h-[35px]' alt='' />
+                          <h1>{like && like.poster ? like.poster.username : ''}</h1>
+                        </div>
+                        <div>
+                          <button className='bg-[#8c6dfd] text-white px-5 py-1 rounded-[20px]' onClick={handleProfile}>View</button></div>
+                      </div>
+                    )
+                  })}
+                </div>
+                : <h1 className='text-white text-center'>No likes</h1>
+              }
+            </div>
           </div>
         </div>
       )}
