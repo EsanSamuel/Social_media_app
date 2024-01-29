@@ -47,3 +47,16 @@ export const POST = async (
     return new Response("Something went wrong!", { status: 500 });
   }
 };
+
+export const GET = async (
+  request: Request,
+  { params }: { params: Params }
+) => { 
+try{
+  await connectDB()
+  const likes = await Like.find({post:params.id}).populate("poster")
+  return new Response(JSON.stringify(likes), { status: 200 });
+} catch (error) {
+  console.log(error);
+  return new Response("Something went wrong!", { status: 500 });
+}}
