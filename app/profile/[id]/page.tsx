@@ -54,7 +54,7 @@ const [user,setUser] = useState<any>('')
           width={100}
           height={100}
           alt=""
-          className="sm:w-[150px] sm:h-[150px] w-[100px] h-[100px] rounded-full sm:mt-[-10px] mt-[-23px]"
+          className="sm:w-[150px] sm:h-[150px] w-[100px] h-[100px] rounded-full sm:mt-[-10%] mt-[-17%]"
         />
         <div className="mt-5  text-[25px]">
           <h1 className="text-[#eaeaea]">{username}</h1>
