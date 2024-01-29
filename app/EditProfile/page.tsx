@@ -140,7 +140,7 @@ const EditProfile = () => {
       </button>
       
       {user.bio && user.coverImage ?
-        <div>
+        <div className='flex flex-col gap-7'>
           <h1 className='text-white pb-5'>Change Bio and Cover image</h1>
           <div className="flex items-center justify-center">
             {!coverImage ? (
