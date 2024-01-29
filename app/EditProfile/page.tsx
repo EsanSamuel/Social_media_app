@@ -161,7 +161,7 @@ const EditProfile = () => {
               />
             )}
           </div>
-          <div className="rounded text-[#eaeaea] mt-5">
+          <div className="rounded text-[#eaeaea] mt-5 bg-[#8c6dfd]">
             <h1 className='py-2 px-4 rounded text-[#eaeaea] bg-[#8c6dfd]'>Select Image</h1>
             <input className=" opacity-0" onChange={handleCoverImageChange} type="file" />
           </div>
