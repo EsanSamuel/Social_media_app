@@ -96,7 +96,7 @@ const MyProfile = () => {
           <div className="py-5 flex w-full justify-between">
             <div>
               <h1 className="text-[#eaeaea] text-[25px]">{user.username}</h1>
-              <h1 className="text-[#eaeaea] sm:text-[15px] text-[13px]">{user.email}</h1>
+              <h1 className="text-[#5f5f5f] sm:text-[15px] text-[13px]">{user.email}</h1>
              <button onClick={() => setOpenModal(true)}>Create Bio</button> 
                 <h1 className="text-[#eaeaea] sm:text-[15px] text-[13px]">{user && user.bio ? user.bio : ""}</h1>
             </div>
