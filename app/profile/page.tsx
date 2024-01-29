@@ -92,7 +92,7 @@ const MyProfile = () => {
             height={100}
             alt=""
             className="sm:w-[150px] sm:h-[150px] w-[100px] h-[100px] rounded-full sm:mt-[-10%] mt-[-17%] z-10"
-          /> : <div className="sm:min-w-[150px] sm:min-h-[150px] min-w-[100px] min-h-[100px] rounded-full sm:mt-[-10%] mt-[-17%] z-10"></div>}
+          /> : <div className="sm:min-w-[150px] sm:min-h-[150px] min-w-[100px] min-h-[100px] rounded-full sm:mt-[-10%] mt-[-17%] z-10 bg-[#1c1c24] border border-neutral-800"></div>}
           <div className="py-5 flex w-full justify-between">
             <div>
               <h1 className="text-[#eaeaea] text-[25px]">{user.username}</h1>
