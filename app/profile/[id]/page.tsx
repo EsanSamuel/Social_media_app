@@ -58,7 +58,7 @@ const [user,setUser] = useState<any>('')
         />
         <div className="mt-5  text-[25px]">
           <h1 className="text-[#eaeaea]">{username}</h1>
-          <h1 className="text-[#eaeaea] sm:text-[15px] text-[13px] pb-2">{useremail}</h1>
+          <h1 className="text-[#5f5f5f] sm:text-[15px] text-[13px] pb-2">{useremail}</h1>
                 <h1 className="text-[#eaeaea] sm:text-[15px] text-[13px]">{user && user.bio ? user.bio : ""}</h1>
         </div>
         <hr />
