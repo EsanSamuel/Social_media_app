@@ -329,7 +329,7 @@ const Card = ({ post }: Props) => {
          {openLikes && (
         <div className="justify-center items-center flex overflow-x-hidden overflow-y-auto fixed inset-0 z-50 outline-none focus:outline-none bg-neutral-800 bg-opacity-70 ">
           <div className='relative w-full lg:w-3/6 my-6 mx-auto lg:max-w-3xl h-full lg:h-auto'>
-            <div className='w-full lg:h-auto border-0 rounded-lg shadow-lg relative flex flex-col gap-6 h-auto px-3 py-6 bg-[#13131a] outline-none focus:outline-none'>
+            <div className='w-full lg:h-auto border-0 rounded-lg shadow-lg relative flex flex-col gap-6 h-auto px-3 py-10 bg-[#13131a] outline-none focus:outline-none'>
               <IoCloseOutline
                 className="text-[#eaeaea] text-[20px] cursor-pointer float-right "
                 onClick={() => setOpenLikes(false)}
