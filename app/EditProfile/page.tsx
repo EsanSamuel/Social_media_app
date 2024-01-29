@@ -5,6 +5,7 @@ import { useSession } from "next-auth/react";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
 import api from '../../libs/api'
+import toast from "react-hot-toast";
 
 const EditProfile = () => {
   const { data: session } = useSession();
@@ -13,6 +14,8 @@ const EditProfile = () => {
   const [username, setUsername] = useState("");
   const router = useRouter();
   const [image, setImage] = useState("");
+  const [bio, setBio] = useState("")
+  const [coverImage, setCoverImage] = useState("")
 
   useEffect(() => {
     const getUser = async () => {
@@ -53,6 +56,45 @@ const EditProfile = () => {
     };
   };
 
+  const handleCoverImageChange = (e: ChangeEvent<HTMLInputElement>) => {
+    e.preventDefault();
+    const file = e.target.files?.[0];
+    if (!file) return;
+    if (!file.type.includes("image")) {
+      console.log("Please upload an image!");
+      return;
+    }
+    const reader = new FileReader();
+    reader.readAsDataURL(file);
+    reader.onload = () => {
+      const result = reader.result as string;
+      setCoverImage(result);
+    };
+  };
+
+  const EditBio = async (e: FormEvent) => {
+    e.preventDefault()
+    try {
+      const response = await api.patch(`/api/bio/${session?.user?.id}`, {
+        bio,
+        coverImage
+      })
+      console.log(response.data)
+      toast.success("Bio and cover Image updated")
+      router.push("/profile")
+    } catch (error) {
+      console.log(error)
+    }
+  }
+
+  useEffect(() => {
+    const getUserBio = async () => {
+      const response = await api.get(`/api/user/${session?.user?.id}`);
+      setBio(response.data.bio);
+    };
+    if (session?.user?.id) getUserBio();
+  }, [session?.user?.id]);
+
   return (
     <div className="sm:px-[30%] py-20 p-5 flex flex-col gap-7">
       <div className="flex items-center justify-center">
@@ -82,7 +124,7 @@ const EditProfile = () => {
       <label className='w-full text-[#eaeaea]'>
         <h1 className="py-1">Change username</h1>
         <input
-          className="p-2 bg-transparent border border-[#5f5f5f] rounded w-full text-[#eaeaea]"
+          className="p-2 bg-transparent border border-neutral-800 rounded w-full text-[#eaeaea]"
           onChange={(e) => setUsername(e.target.value)}
           placeholder="Enter username"
           type="text"
@@ -96,6 +138,55 @@ const EditProfile = () => {
       >
         Edit Profile
       </button>
+      
+      {user.bio && user.coverImage ?
+        <div>
+          <h1 className='text-white pb-5'>Change Bio and Cover image</h1>
+          <div className="flex items-center justify-center">
+            {!coverImage ? (
+              <Image
+                src={user && user.coverImage ? user.coverImage : ""}
+                width={1000}
+                height={1000}
+                alt=""
+                className="rounded "
+              />
+            ) : (
+              <Image
+                src={coverImage}
+                width={1000}
+                height={1000}
+                alt=""
+                className="rounded "
+              />
+            )}
+          </div>
+          <div className="rounded text-[#eaeaea] mt-5">
+            <h1 className='py-2 px-4 rounded text-[#eaeaea] bg-[#8c6dfd]'>Select Image</h1>
+            <input className=" opacity-0" onChange={handleCoverImageChange} type="file" />
+          </div>
+
+          <label className='w-full text-[#eaeaea]'>
+            <h1 className="py-1">Change Bio</h1>
+            <input
+              className="p-2 bg-transparent border border-neutral-800 rounded w-full text-[#eaeaea]"
+              onChange={(e) => setBio(e.target.value)}
+              placeholder="Enter username"
+              type="text"
+              value={bio}
+            />
+          </label>
+
+          <button
+            className="py-2 px-4 rounded text-[#eaeaea] bg-[#8c6dfd] w-full mt-5"
+            onClick={EditBio}
+          >
+            Edit Profile
+          </button>
+
+        </div>
+        : ""}
+
     </div>
   );
 };
