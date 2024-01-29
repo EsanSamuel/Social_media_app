@@ -86,13 +86,13 @@ const MyProfile = () => {
               alt=""
               className='sm:min-h-[200px] min-h-[150px] sm:max-h-[200px] max-h-[150px] rounded' />
           }
-          <Image
+          {user.image ? <Image
             src={user.image}
             width={100}
             height={100}
             alt=""
             className="sm:w-[150px] sm:h-[150px] w-[100px] h-[100px] rounded-full sm:mt-[-10%] mt-[-17%] z-10"
-          />
+          /> : <div className="sm:min-w-[150px] sm:min-h-[150px] min-w-[100px] min-h-[100px] rounded-full sm:mt-[-10%] mt-[-17%] z-10"></div>}
           <div className="py-5 flex w-full justify-between">
             <div>
               <h1 className="text-[#eaeaea] text-[25px]">{user.username}</h1>
