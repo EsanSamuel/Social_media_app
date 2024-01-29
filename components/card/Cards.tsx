@@ -225,7 +225,7 @@ const Card = ({ post }: Props) => {
           />
           <div className='flex gap-6 text-[#5f5f5f]'>
             <div className='flex gap-2'><FaRegHeart className="text-[#eaeaea] text-[15px] cursor-pointer " onClick={handleLike} />
-              <div className="text-[#eaeaea] text-[15px] mt-[-2px]">{post.likeCounts}</div></div>
+              <div className="text-[#eaeaea] text-[15px] mt-[-2px]" onClick={() => setOpenLikes(true)}>{post.likeCounts}</div></div>
 
             <div className="flex gap-2">
               <FaRegCommentAlt className="text-[#eaeaea] text-[15px] cursor-pointer " onClick={handlePostClick} />
