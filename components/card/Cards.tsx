@@ -96,6 +96,7 @@ const Card = ({ post }: Props) => {
   }
 
   const handleLike = async () => {
+    if(!session?.user) return
     try {
       await api.post(`/api/Like/${post._id}`, {
         userId: session?.user?.id
