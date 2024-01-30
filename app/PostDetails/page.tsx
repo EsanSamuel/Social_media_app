@@ -56,9 +56,7 @@ const PostDetails = () => {
 
 
     return (
-        <div className="sm:p-5 sm:flex gap-5 w-full flex-row relative">
-            <Sidebar />
-            <div className='sm:px-20 p-5'>
+            <div className='sm:px-[20%] p-5'>
                 <div className="mt-10 border border-neutral-800 sm:rounded-[40px] rounded-[20px] sm:p-7 p-5">
                     <div className="flex w-full justify-between gap-2">
                         <div className="flex gap-2" >
@@ -128,10 +126,7 @@ const PostDetails = () => {
                 </div>
 
             </div>
-            <div className=''>
-                <Users />
-            </div>
-        </div>
+            
     )
 }
 
