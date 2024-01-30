@@ -97,9 +97,9 @@ const MyProfile = () => {
           <div className="py-5 flex w-full justify-between">
             <div>
               <h1 className="text-[#eaeaea] text-[25px]">{user.username}</h1>
-              <h1 className="text-[#5f5f5f] sm:text-[15px] text-[13px]">{user.email}</h1>
+              <h1 className="text-[#5f5f5f] sm:text-[13px] text-[11px]">{user.email}</h1>
               {!user.bio ? <button onClick={() => setOpenModal(true)} className='text-[#eaeaea] text-[13px] p-2 flex gap-2'><CiEdit /> Create Bio</button> :
-                <h1 className="text-[#eaeaea] sm:text-[15px] text-[13px]">{user && user.bio ? user.bio : ""}</h1>}
+                <h1 className="text-[#eaeaea] sm:text-[15px] text-[13px] mt-3">{user && user.bio ? user.bio : ""}</h1>}
             </div>
             <div className="">
               <button
