@@ -354,7 +354,7 @@ const Card = ({ post }: Props) => {
                           <h1 className='text-[13px]'>{like && like.poster ? like.poster.username : ''}</h1>
                         </div>
                         <div>
-                          <button className='bg-[#8c6dfd] text-white px-5 py-1 rounded-[20px]' onClick={handleProfile}>View</button></div>
+                          <button className='bg-[#8c6dfd] text-white px-5 py-1 rounded-[20px] text-[13px]' onClick={handleProfile}>View</button></div>
                       </div>
                     )
                   })}
