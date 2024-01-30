@@ -349,7 +349,7 @@ const Card = ({ post }: Props) => {
                       <div key={like._id} className='flex justify-between text-white'>
                         <div className="flex gap-3">
                           <Image src={like && like.poster ? like.poster.image : ''} width={100} height={100} className='rounded-full w-[35px] h-[35px]' alt='' />
-                          <h1 className='text-[13px]>{like && like.poster ? like.poster.username : ''}</h1>
+                          <h1 className='text-[13px]'>{like && like.poster ? like.poster.username : ''}</h1>
                         </div>
                         <div>
                           <button className='bg-[#8c6dfd] text-white px-5 py-1 rounded-[20px]' onClick={handleProfile}>View</button></div>
