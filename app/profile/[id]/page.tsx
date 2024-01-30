@@ -15,7 +15,7 @@ interface Params {
 const Profile = ({ params }: { params: Params }) => {
   const { data: session } = useSession();
   const [posts, setPosts] = useState<any>([]);
-const [user,setUser] = useState<any>('')
+  const [user, setUser] = useState<any>('')
   const searchParams = useSearchParams();
   const username = searchParams.get("name");
   const userimage = searchParams.get("image");
@@ -29,26 +29,26 @@ const [user,setUser] = useState<any>('')
     if (params?.id) getUserPosts();
   }, [params?.id]);
 
-  useEffect(() => { 
-     const getUser = async () => { 
-       const response = await api.get(`/api/user/${params?.id}`); 
-       setUser(response.data); 
-     }; 
-     if (params?.id) getUser(); 
-   }, [params?.id]);
+  useEffect(() => {
+    const getUser = async () => {
+      const response = await api.get(`/api/user/${params?.id}`);
+      setUser(response.data);
+    };
+    if (params?.id) getUser();
+  }, [params?.id]);
 
   return (
     <div className="sm:p-5 sm:flex gap-5 w-full relative">
       <Sidebar />
       <div className="sm:p-20 p-1 w-full">
-          {!user.coverImage ? <div className='sm:min-h-[200px] min-h-[150px] bg-[#1c1c24] rounded'></div> : 
-             <Image 
-               src={user.coverImage} 
-               width={1000} 
-               height={1000} 
-               alt="" 
-               className='sm:min-h-[200px] min-h-[150px] sm:max-h-[200px] max-h-[150px] rounded' /> 
-           }
+        {!user.coverImage ? <div className='sm:min-h-[200px] min-h-[150px] bg-[#1c1c24] rounded'></div> :
+          <Image
+            src={user.coverImage}
+            width={1000}
+            height={1000}
+            alt=""
+            className='sm:min-h-[200px] min-h-[150px] sm:max-h-[200px] max-h-[150px] rounded' />
+        }
         <Image
           src={userimage!}
           width={100}
@@ -59,17 +59,22 @@ const [user,setUser] = useState<any>('')
         <div className="mt-5  text-[25px]">
           <h1 className="text-[#eaeaea]">{username}</h1>
           <h1 className="text-[#5f5f5f] sm:text-[15px] text-[13px] pb-2">{useremail}</h1>
-                <h1 className="text-[#eaeaea] sm:text-[15px] text-[13px]">{user && user.bio ? user.bio : ""}</h1>
+          <h1 className="text-[#eaeaea] sm:text-[15px] text-[13px]">{user && user.bio ? user.bio : ""}</h1>
         </div>
         <hr />
 
         <div className="">
+          {posts?.length > 0 ? (
+            <div>
+              {posts.map((post: Record<string, any>) => (
+                <div key={post._id}>
+                  <Card post={post} />
+                </div>
+              ))}</div>
+          ) : (
+            <h1 className='text-[#5f5f5f] text-center text-[15px] mt-20 '>No Post found!</h1>
+          )}
 
-          {posts.map((post: Record<string, any>) => (
-            <div key={post._id}>
-              <Card post={post} />
-            </div>
-          ))}
         </div>
       </div>
 

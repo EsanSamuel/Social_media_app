@@ -98,7 +98,7 @@ const MyProfile = () => {
             <div>
               <h1 className="text-[#eaeaea] text-[25px]">{user.username}</h1>
               <h1 className="text-[#5f5f5f] sm:text-[13px] text-[11px]">{user.email}</h1>
-              {!user.bio ? <button onClick={() => setOpenModal(true)} className='text-[#eaeaea] text-[13px] p-2 flex gap-2'><CiEdit /> Create Bio</button> :
+              {!user.bio ? <button onClick={() => setOpenModal(true)} className='text-[#eaeaea] text-[13px] py-2 flex gap-2'><CiEdit /> Create Bio</button> :
                 <h1 className="text-[#eaeaea] sm:text-[15px] text-[13px] mt-3">{user && user.bio ? user.bio : ""}</h1>}
             </div>
             <div className="">
@@ -117,11 +117,17 @@ const MyProfile = () => {
               <h1 className='text-[#eaeaea] text-[16px]'>My Posts</h1>
               <><h1 className='text-[#eaeaea] text-[12px]'>{posts.length} posts</h1></>
             </div>
-            {posts.map((post: Record<string, any>) => (
-              <div key={post._id}>
-                <Card post={post} />
-              </div>
-            ))}
+            {posts?.length > 0 ? (
+              <div>
+                {posts.map((post: Record<string, any>) => (
+                  <div key={post._id}>
+                    <Card post={post} />
+                  </div>
+                ))}</div>
+            ) : (
+              <h1 className='text-[#5f5f5f] text-center text-[15px] mt-20'>No post found!</h1>
+            )}
+
           </div>
         </div>
 
