@@ -8,6 +8,7 @@ import Card from "../../components/card/Cards";
 import Users from "../../components/user/Users";
 import { useRouter } from "next/navigation";
 import { IoCloseOutline } from "react-icons/io5";
+import { CiEdit } from "react-icons/ci";
 
 const MyProfile = () => {
   const { data: session } = useSession();
@@ -78,7 +79,7 @@ const MyProfile = () => {
       <div className="sm:p-5 sm:flex gap-5 w-full relative">
         <Sidebar />
         <div className="sm:p-20 p-1 w-full">
-          {!user.coverImage ? <div className='sm:min-h-[200px] min-h-[150px] bg-[#1c1c24] rounded'></div> :
+          {!user.coverImage ? <div className='sm:min-h-[200px] min-h-[150px] bg-[#1c1c24] rounded' onClick={() => setOpenModal(true)} ></div> :
             <Image
               src={user.coverImage}
               width={1000}
@@ -97,8 +98,8 @@ const MyProfile = () => {
             <div>
               <h1 className="text-[#eaeaea] text-[25px]">{user.username}</h1>
               <h1 className="text-[#5f5f5f] sm:text-[15px] text-[13px]">{user.email}</h1>
-             <button onClick={() => setOpenModal(true)}>Create Bio</button> 
-                <h1 className="text-[#eaeaea] sm:text-[15px] text-[13px]">{user && user.bio ? user.bio : ""}</h1>
+              {!user.bio ? <button onClick={() => setOpenModal(true)} className='text-[#eaeaea] text-[13px] p-2 flex gap-2'><CiEdit /> Create Bio</button> :
+                <h1 className="text-[#eaeaea] sm:text-[15px] text-[13px]">{user && user.bio ? user.bio : ""}</h1>}
             </div>
             <div className="">
               <button
@@ -137,12 +138,12 @@ const MyProfile = () => {
                 onClick={() => setOpenModal(false)}
               />
 
-              <h1 className="text-[25px] text-[#eaeaea]">Bio and Cover Image</h1>
+              <h1 className="text-[18px] text-[#eaeaea]">Add Bio and Cover Image</h1>
               {!coverImage ? (
-                <div className="w-auto min-h-[300px] border border-neutral-800 rounded mt-10 border-dashed">
+                <div className="w-auto min-h-[300px] max-h-[300px] border border-neutral-800 rounded mt-10 border-dashed">
                   <div>
                     <h1 className="text-[#eaeaea] text-center mt-[100px]">
-                      Select Image
+                      Select Cover Image
                     </h1>
                     <input
                       type="file"
@@ -158,7 +159,7 @@ const MyProfile = () => {
                     width={1000}
                     height={1000}
                     alt=""
-                    className="w-full min-h-[400px] rounded"
+                    className="w-full min-h-[400px] rounded max-h-[300px]"
                   />
                 </div>
               )}

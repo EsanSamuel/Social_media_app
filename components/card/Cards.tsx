@@ -13,6 +13,8 @@ import { AiOutlineSend } from "react-icons/ai";
 import { z } from 'zod'
 import { useForm } from "react-hook-form";
 import { zodResolver } from '@hookform/resolvers/zod'
+import { formatDistanceToNowStrict } from 'date-fns'
+import { GoDotFill } from 'react-icons/go'
 
 interface Props {
   post: Record<string, any>;
@@ -71,8 +73,8 @@ const Card = ({ post }: Props) => {
       setEdit(response.data.post);
     };
 
-   if(post._id) getPost();
-  },[post._id]);
+    if (post._id) getPost();
+  }, [post._id]);
 
   const EditModal = () => {
     setEditModal(true);
@@ -96,7 +98,7 @@ const Card = ({ post }: Props) => {
   }
 
   const handleLike = async () => {
-    if(!session?.user) return
+    if (!session?.user) return
     try {
       await api.post(`/api/Like/${post._id}`, {
         userId: session?.user?.id
@@ -107,7 +109,7 @@ const Card = ({ post }: Props) => {
       console.log(error)
     }
   }
-  
+
   useEffect(() => {
     const getLikes = async () => {
       const response = await api.get(`/api/Like/${post._id}`)
@@ -174,12 +176,12 @@ const Card = ({ post }: Props) => {
     }
   }
 
-  /*const createdAt = useMemo(() => {
+  const createdAt = useMemo(() => {
     if (!post?.createdAt) {
       return null
     }
-    //return formatDistanceToNowStrict(new Date(post.createdAt))
-  }, [post?.createdAt])*/
+    return formatDistanceToNowStrict(new Date(post.createdAt))
+  }, [post?.createdAt])
 
   return (
     <div>
@@ -200,7 +202,7 @@ const Card = ({ post }: Props) => {
             )}
             <div className="flex flex-col">
               <h1 className="text-[#eaeaea] text-[15px]">
-                {post.poster.username}
+                {post.poster.username} <span className='ml-2 text-[10px] text-[#5f5f5f]'>{createdAt} ago</span>
               </h1>
               <div>
                 <p className="text-[13px] text-[#5f5f5f]">{post.poster.email}</p>
@@ -226,7 +228,7 @@ const Card = ({ post }: Props) => {
           />
           <div className='flex gap-6 text-[#5f5f5f]'>
             <div className='flex gap-2'><FaRegHeart className="text-[#eaeaea] text-[15px] cursor-pointer " onClick={handleLike} />
-              <div className="text-[#eaeaea] text-[15px] mt-[-2px]" onClick={() => setOpenLikes(true)}>{post.likeCounts}</div></div>
+              <div className="text-[#eaeaea] text-[15px] mt-[-2px] cursor-pointer" onClick={() => setOpenLikes(true)}>{post.likeCounts} {post.likeCounts > 1 ? 'likes' : 'like'}</div></div>
 
             <div className="flex gap-2">
               <FaRegCommentAlt className="text-[#eaeaea] text-[15px] cursor-pointer " onClick={handlePostClick} />
@@ -326,7 +328,7 @@ const Card = ({ post }: Props) => {
         </div>
       )}
 
-         {openLikes && (
+      {openLikes && (
         <div className="justify-center items-center flex overflow-x-hidden overflow-y-auto fixed inset-0 z-50 outline-none focus:outline-none bg-neutral-800 bg-opacity-70 ">
           <div className='relative w-full lg:w-3/6 my-6 mx-auto lg:max-w-3xl h-full lg:h-auto'>
             <div className='w-full lg:h-auto border-0 rounded-lg shadow-lg relative flex flex-col gap-6 h-auto px-3 py-10 bg-[#13131a] outline-none focus:outline-none'>
