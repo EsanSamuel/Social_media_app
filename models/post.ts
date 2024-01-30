@@ -27,7 +27,7 @@ const PostSchema = new Schema<IPost>({
   },
   createdAt: {
     type: String,
-    default: new Date(),
+    default: () => new Date()toISOString(),
   },
 });
 
