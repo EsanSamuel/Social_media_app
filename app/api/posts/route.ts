@@ -7,7 +7,7 @@ export const GET = async (request: Request) => {
   try {
     await connectDB();
 
-    const Posts = await Post.find({}).populate("poster").sort({ createdAt: -1});
+    const Posts = await Post.find({}).sort({ createdAt: -1 }).populate("poster")
 
     return new Response(JSON.stringify(Posts), { status: 200 });
   } catch (error) {
