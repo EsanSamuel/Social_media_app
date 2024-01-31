@@ -222,7 +222,7 @@ const Card = ({ post }: Props) => {
             width={1000}
             height={1000}
             alt=""
-            className="w-full sm:min-h-[500px] min-h-[300px] max-h-[500px] sm:rounded-[30px] rounded-[20px]"
+            className="w-full sm:min-h-[500px] min-h-[300px] sm:max-h-[500px] max-h-[400px] sm:rounded-[30px] rounded-[20px]"
             priority
             onClick={handlePostClick}
           />
