@@ -8,7 +8,7 @@ interface Params {
 export const GET = async (request: Request, { params }: { params: Params }) => {
   try {
     await connectDB();
-    const getUserPosts = await Post.find({ poster: params.id }).populate(
+    const getUserPosts = await Post.find({ poster: params.id }).sort({ createdAt: -1 }).populate(
       "poster"
     );
 
