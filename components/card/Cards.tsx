@@ -145,7 +145,7 @@ const Card = ({ post }: Props) => {
       })
       setComments('')
       toast.success('Comment posted!')
-      window.location.reload()
+      router.push('/PostDetails')
     } catch (error) {
       console.log(error)
     }
